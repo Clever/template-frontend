@@ -19,5 +19,7 @@ publish:
     when:
       branch: master
 script:
-- make test
-- make build
+  # TODO: why require a script here?
+  - ./test_drone.sh
+#- make test
+#- make build
