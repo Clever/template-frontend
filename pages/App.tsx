@@ -7,17 +7,17 @@ import "./App.less";
 import {Home} from "./home/Home";
 
 class App extends React.Component<any, any> {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	render() {	
+  render() {	
     return (
       <div>
-        {this.props.children}
+      {this.props.children}
       </div>
     );
-	}
+  }
 }
 
 function NotFound() {

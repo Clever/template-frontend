@@ -1,8 +1,7 @@
 import * as express from "express";
 import * as cookieParser from "cookie-parser";
-//import * as url from "url";
 import * as bodyParser from "body-parser";
-//import * as discovery from "clever-discovery";
+import * as discovery from "clever-discovery";
 
 /* App */
 const app = express();

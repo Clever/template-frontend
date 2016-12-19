@@ -21,7 +21,7 @@
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
     "ts-node": "^1.6.0",
-    "typescript": "^2.0.3"
+    "typescript": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
@@ -43,7 +43,6 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^0.9.5",
     "tslint": "^3.15.1",
-    "typings": "^0.8.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.13.3"
   }

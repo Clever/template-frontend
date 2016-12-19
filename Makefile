@@ -3,9 +3,6 @@ include node.mk
 NODE_VERSION := "v6"
 SHELL := /bin/bash
 
-ZENDESK_SANDBOX_ID := 1477610967
-ZENDESK_SUBDOMAIN := $(ZENDESK_SUBDOMAIN)$(ZENDESK_SANDBOX_ID)
-
 $(eval $(call node-version-check,$(NODE_VERSION)))
 
 TEST_FILES := $(shell find . -name "*test.ts*" -not -path "./node_modules/*")
@@ -35,4 +32,3 @@ build: copy_static_assets
 
 run: copy_static_assets
 	node_modules/webpack/bin/webpack.js --watch & ./node_modules/nodemon/bin/nodemon.js -e .ts --watch server.ts --watch pages --watch lib --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node --ignoreWarnings 2307 ./server.ts'
-
