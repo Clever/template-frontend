@@ -1,4 +1,4 @@
-image: bradrydzewski/base
+image: clever/drone-node:6.2.2
 notify:
   email:
     recipients:
