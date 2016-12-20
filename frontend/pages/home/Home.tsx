@@ -1,6 +1,8 @@
 import * as React from "react";
 
-export function Home(props) {
+import {Button} from "clever-components"
+
+export default function Home(props) {
   return (
     <div>
       <h1>Home</h1>

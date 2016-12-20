@@ -16,7 +16,7 @@ app.get("/_healthcheck", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(`${__dirname}/pages/index.html`);
+  res.sendFile(`${__dirname}/frontend/index.html`);
 });
 
 app.listen(process.env.PORT, () => {
