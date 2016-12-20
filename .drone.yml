@@ -19,7 +19,6 @@ publish:
     when:
       branch: master
 script:
-  # TODO: why require a script here?
-  - ./test_drone.sh
-#- make test
-#- make build
+  - npm install
+  - make test
+  - make build
