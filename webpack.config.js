@@ -7,19 +7,57 @@ module.exports = {
     filename: "App.js",
   },
   module: {
-    loaders: [
-      { test: /\.css$/, loader: "style!css!postcss" },
-      { test: /\.less$/, loader: "style!css!postcss!less" },
-      { test: /\.(eot|otf|woff|svg|ttf|png|jpg)$/, loader: "url-loader" },
-      { test: /\.tsx?$/, loader: "babel-loader?presets[]=es2015,presets[]=stage-0!ts-loader" },
-      { test: /\.(json|html)$/, loader: "file?name=[name].[ext]" },
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: function() {
+                return [
+                  autoprefixer({browsers: "> 1% in US, last 3 versions, ie > 9"})
+                ];
+              }
+            }
+          },
+          "less-loader"
+        ]
+      },
+      {
+        test: /\.(eot|otf|woff|svg|ttf|png|jpg)$/,
+        use: ["url-loader"]
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["es2015", "stage-0"]
+            }
+          },
+          {
+            loader: "ts-loader",
+            options: {
+              ignoreDiagnostics: [2307]
+            }
+          }
+        ],
+      },
+      {
+        test: /\.(json|html)$/,
+        use: [{
+          loader: "file-loader",
+          "options": {name: "[name].[ext]"}
+        }]
+      }
     ],
   },
-  postcss: [autoprefixer({browsers: "> 1% in US, last 3 versions, ie > 9"})],
   resolve: {
-    extensions: ["", ".web.js", ".js", ".ts", ".tsx", ".less"],
-  },
-  ts: {
-    ignoreDiagnostics: [2307],
+    extensions: [".js", ".ts", ".tsx", ".less"],
   },
 };
