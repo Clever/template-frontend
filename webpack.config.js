@@ -1,7 +1,7 @@
 const autoprefixer = require("autoprefixer")
 
 module.exports = {
-  entry: ["babel-polyfill", "whatwg-fetch", "./frontend/Index.tsx"],
+  entry: ["core-js", "whatwg-fetch", "./frontend/Index.tsx"],
   output: {
     path: "./build",
     filename: "App.js",
