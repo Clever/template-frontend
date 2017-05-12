@@ -5,4 +5,4 @@ WORKDIR /{{.AppName}}
 COPY . /{{.AppName}}
 RUN npm install
 
-CMD ./node_modules/.bin/ts-node --ignoreWarnings 2307 server.ts
+CMD ./node_modules/.bin/ts-node --ignoreWarnings 2307 src/backend/index.ts
