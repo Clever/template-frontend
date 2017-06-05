@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-import {Button} from "clever-components"
+import { Button } from 'clever-components';
 
 export default function Home(props) {
   return (

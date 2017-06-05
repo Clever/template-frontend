@@ -1,14 +1,14 @@
-import * as React from "react";
-import {Wizard} from "clever-components"
+import * as React from 'react';
+import { Wizard } from 'clever-components';
 
-import "./App.less";
+import './App.less';
 
 export default class Layout extends React.Component<any, any> {
   constructor(props) {
     super(props);
   }
 
-  render() {	
+  public render() {
     return (
       <div>
         {this.props.children}
