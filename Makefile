@@ -2,18 +2,21 @@ include node.mk
 
 NODE_VERSION := "v6"
 SHELL := /bin/bash
+STYLELINT := ./node_modules/.bin/stylelint --config ./.stylelintrc
 
 $(eval $(call node-version-check,$(NODE_VERSION)))
 
 TEST_FILES := $(shell find . -name "*test.ts*" -not -path "./node_modules/*")
 TS_FILES := $(shell find . -name "*.ts" -not -path "./node_modules/*")
 TSX_FILES := $(shell find . -name "*.tsx" -not -path "./node_modules/*")
+LESS_FILES := $(shell find . -name "*.less" -not -path "./node_modules/*" -not -path "./dist/*" -not -path "./vendor/*")
 
 .PHONY: test lint run build $(TEST_FILES)
 
 lint:
 	./node_modules/.bin/tslint $(TS_FILES)
 	./node_modules/.bin/tslint $(TSX_FILES)
+	@$(STYLELINT) $(LESS_FILES)
 
 $(TEST_FILES):
 	NODE_ENV=test TS_NODE_IGNORE_WARNINGS=2307 ./node_modules/.bin/mocha --require ts-node/register $@
