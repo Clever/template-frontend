@@ -14,8 +14,6 @@ TSX_FILES := $(shell find . -name "*.tsx" -not -path "./node_modules/*")
 lint:
 	./node_modules/.bin/tslint $(TS_FILES)
 	./node_modules/.bin/tslint $(TSX_FILES)
-	./node_modules/.bin/eslint -c .eslintrc.yml $(TS_FILES) || true
-	./node_modules/.bin/eslint -c .eslintrc.yml $(TSX_FILES) || true
 
 $(TEST_FILES):
 	NODE_ENV=test TS_NODE_IGNORE_WARNINGS=2307 ./node_modules/.bin/mocha --require ts-node/register $@
