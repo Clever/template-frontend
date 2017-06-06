@@ -6,6 +6,8 @@
   ],
   "rules": {
     "function-name": false,
-    "ordered-imports": false
+    "ordered-imports": [
+      false
+    ]
   }
 }
