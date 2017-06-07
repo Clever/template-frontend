@@ -1,5 +1,5 @@
 {
-  "name": "reports-dashboard",
+  "name": "{{.AppName}}",
   "version": "1.0.0",
   "dependencies": {
     "@types/body-parser": "0.0.34",
