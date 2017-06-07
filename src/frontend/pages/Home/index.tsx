@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { Button } from 'clever-components';
 
+import './index.less';
+
 export default function Home(props) {
   return (
     <div className="pages--Home">
