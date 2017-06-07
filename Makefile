@@ -19,6 +19,12 @@ lint:
 test:
 	./node_modules/.bin/jest
 
+# ci-test runs the tests sequentially
+# parallelized code doesn't actually work well with 1 core.
+# https://facebook.github.io/jest/docs/troubleshooting.html#tests-are-extremely-slow-on-docker-and-or-continuous-integration-server
+ci-test:
+	node_modules/.bin/jest --runInBand
+
 copy_static_assets:
 	rm -rf ./build
 	mkdir ./build
