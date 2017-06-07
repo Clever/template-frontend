@@ -60,10 +60,10 @@
     },
     "testRegex": ".+test.+(ts|tsx|js)",
     "setupFiles": [
-      "./jest/setup.js"
+      "./jest_scripts/setup.js"
     ],
     "moduleNameMapper": {
-      ".*(css|less|png|svg)$": "<rootDir>/jest/staticImportStub.js"
+      ".*(css|less|png|svg)$": "<rootDir>/jest_scripts/staticImportStub.js"
     }
   }
 }
