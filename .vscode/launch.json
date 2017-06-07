@@ -1,0 +1,37 @@
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    // config based on this suggestion:
+    // https://github.com/TypeStrong/ts-node/issues/46#issuecomment-296895962
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server",
+      "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
+      "args": [
+        "${workspaceRoot}/src/backend/index.ts"
+      ],
+      "protocol": "inspector"
+    },
+    {
+      "name": "Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/.bin/jest",
+      "stopOnEntry": false,
+      "args": [
+        "--runInBand",
+        "--no-cache"
+      ],
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": null,
+      "runtimeExecutable": null,
+      "runtimeArgs": [
+        "--nolazy"
+      ]
+    }
+  ]
+}
