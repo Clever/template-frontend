@@ -4,6 +4,8 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 // import * as discovery from "clever-discovery";
 
+import { PORT } from '../../config';
+
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -26,7 +28,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'frontend', 'index.html'));
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   // tslint:disable-next-line:no-console
-  console.log(`Listening on port ${process.env.PORT}...`);
+  console.log(`Listening on port ${PORT}...`);
 });
