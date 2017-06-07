@@ -6,6 +6,9 @@
   ],
   "rules": {
     "function-name": false,
+    "import-name": [
+      false
+    ],
     "ordered-imports": [
       false
     ]
