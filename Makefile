@@ -18,7 +18,7 @@ lint:
 	./node_modules/.bin/stylelint --config ./.stylelintrc $(LESS_FILES)
 
 $(TEST_FILES):
-	NODE_ENV=test TS_NODE_IGNORE_WARNINGS=2307 ./node_modules/.bin/mocha --require ts-node/register $@
+	./node_modules/.bin/jest
 
 test: $(TEST_FILES)
 
