@@ -4,7 +4,7 @@ const autoprefixer = require("autoprefixer");
 module.exports = {
   entry: ["core-js", "whatwg-fetch", "./src/frontend/Index.tsx"],
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "__build"),
     filename: "App.js"
   },
   module: {

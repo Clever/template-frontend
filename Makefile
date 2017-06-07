@@ -26,9 +26,9 @@ ci-test:
 	node_modules/.bin/jest --runInBand
 
 copy_static_assets:
-	rm -rf ./build
-	mkdir ./build
-	cp -r ./public/* ./build
+	rm -rf ./__build
+	mkdir ./__build
+	cp -r ./public/* ./__build
 
 build: copy_static_assets
 	./node_modules/webpack/bin/webpack.js
