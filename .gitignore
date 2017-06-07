@@ -9,3 +9,10 @@
 
 node_modules
 build
+
+# VSCode
+
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
