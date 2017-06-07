@@ -16,6 +16,8 @@
       ],
       "protocol": "inspector"
     },
+    // config based on this suggestion:
+    // https://github.com/kulshekhar/ts-jest/issues/46
     {
       "name": "Tests",
       "type": "node",
