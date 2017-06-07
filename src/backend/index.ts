@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
+import * as path from 'path';
 // import * as discovery from "clever-discovery";
 
 const app = express();
@@ -8,7 +9,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('build'));
+app.use(express.static(path.join(__dirname, '..', '..', 'build')));
 
 // Etags aren't properly handled by all browsers so we outright disable all caching on
 // our API methods.
@@ -22,7 +23,7 @@ app.get('/_healthcheck', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(`${__dirname}/frontend/index.html`);
+  res.sendFile(path.resolve(__dirname, '..', 'frontend', 'index.html'));
 });
 
 app.listen(process.env.PORT, () => {
