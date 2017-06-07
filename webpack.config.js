@@ -1,10 +1,11 @@
-const autoprefixer = require("autoprefixer")
+const path = require("path");
+const autoprefixer = require("autoprefixer");
 
 module.exports = {
   entry: ["core-js", "whatwg-fetch", "./src/frontend/Index.tsx"],
   output: {
-    path: "/build",
-    filename: "App.js",
+    path: path.resolve(__dirname, "build"),
+    filename: "App.js"
   },
   module: {
     rules: [
@@ -18,7 +19,9 @@ module.exports = {
             options: {
               plugins: function() {
                 return [
-                  autoprefixer({browsers: "> 1% in US, last 3 versions, ie > 9"})
+                  autoprefixer({
+                    browsers: "> 1% in US, last 3 versions, ie > 9"
+                  })
                 ];
               }
             }
@@ -35,29 +38,25 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
-            options: {
-              presets: ["es2015", "stage-0"]
-            }
-          },
-          {
             loader: "ts-loader",
             options: {
               ignoreDiagnostics: [2307]
             }
           }
-        ],
+        ]
       },
       {
         test: /\.(json|html)$/,
-        use: [{
-          loader: "file-loader",
-          "options": {name: "[name].[ext]"}
-        }]
+        use: [
+          {
+            loader: "file-loader",
+            options: { name: "[name].[ext]" }
+          }
+        ]
       }
-    ],
+    ]
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx", ".less"],
-  },
+    extensions: [".js", ".ts", ".tsx", ".less"]
+  }
 };
