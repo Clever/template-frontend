@@ -11,7 +11,7 @@ export function createApp() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  app.use(express.static(path.join(__dirname, '..', '..', '__build')));
+  app.use(express.static(path.join(__dirname, '..', '..', '..', '__build')));
 
   // Etags aren't properly handled by all browsers so we outright disable all caching on
   // our API methods.
@@ -33,7 +33,7 @@ export function createApp() {
   });
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', '..', 'frontend', 'index.html'));
   });
 
   return app;
