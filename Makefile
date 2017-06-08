@@ -34,6 +34,4 @@ build: copy_static_assets
 	./node_modules/webpack/bin/webpack.js
 
 run: copy_static_assets
-	node_modules/webpack/bin/webpack.js --watch & ./node_modules/nodemon/bin/nodemon.js -e
-.ts,jsx,tsx,less --watch src/backend/**/*.[jt]sx? --exec 'NODE_ENV=development PORT=5020
-HOST=localhost ./node_modules/.bin/ts-node ./src/backend/server.ts'
+	node_modules/webpack/bin/webpack.js --watch & ./node_modules/nodemon/bin/nodemon.js -e .ts,jsx,tsx,less --watch src/backend/**/*.[jt]sx? --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node ./src/backend/server.ts'
