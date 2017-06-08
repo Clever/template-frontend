@@ -3,7 +3,8 @@ import * as express from 'express';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-// import * as discovery from "clever-discovery";
+import * as kayvee from 'kayvee';
+import * as discovery from 'clever-discovery';
 
 import { PORT } from '../../config';
 
