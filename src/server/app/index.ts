@@ -33,7 +33,7 @@ export function createApp() {
   });
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', '..', 'frontend', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', '..', 'ui', 'index.html'));
   });
 
   return app;
