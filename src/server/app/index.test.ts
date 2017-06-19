@@ -12,7 +12,7 @@ describe('server', () => {
   });
 
   // this is an example of mocking a global using jest
-  describe('/fetch_clever_website', () => {
+  describe('/api/fetch_clever_website', () => {
     it('returns the Clever website', async () => {
       const mockBody = 'hello world!';
 
@@ -23,7 +23,7 @@ describe('server', () => {
       ));
 
       await supertest(createApp())
-        .get('/fetch_clever_website')
+        .get('/api/fetch_clever_website')
         .expect(200)
         .expect(mockBody);
     });

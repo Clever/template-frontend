@@ -26,7 +26,7 @@ export function createApp() {
 
   // NOTE: this endpoint is only here to demonstrate how to mock fetch in
   // index.test.ts. Remove this before actually deploying {{.AppName}}!
-  app.get('/fetch_clever_website', async (req, res) => {
+  app.get('/api/fetch_clever_website', async (req, res) => {
     const resp = await fetch('https://clever.com');
     const text = await resp.text();
     res.send(text);
