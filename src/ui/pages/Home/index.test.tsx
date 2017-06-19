@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 
 import Home from './';
 
+// TODO: add more UI tests for rendered Home page
+
 describe('Home', () => {
   it('renders a header', () => {
     const rendered = shallow(<Home />);

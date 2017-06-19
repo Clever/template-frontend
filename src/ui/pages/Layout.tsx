@@ -9,10 +9,11 @@ export default class Layout extends React.Component<any, any> {
   }
 
   public render() {
+    // TODO: define a true layout for the application.
     return (
-      <div>
+      <main>
         {this.props.children}
-      </div>
+      </main>
     );
   }
 }

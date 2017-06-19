@@ -11,6 +11,7 @@ describe('server', () => {
     });
   });
 
+  // TODO: remove this test once the associated endpoint is removed
   // this is an example of mocking a global using jest
   describe('/api/fetch_clever_website', () => {
     it('returns the Clever website', async () => {
@@ -28,4 +29,6 @@ describe('server', () => {
         .expect(mockBody);
     });
   });
+
+  // TODO: test future API routes here, or in other test files.
 });

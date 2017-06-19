@@ -24,14 +24,18 @@ export function createApp() {
     res.sendStatus(200);
   });
 
-  // NOTE: this endpoint is only here to demonstrate how to mock fetch in
-  // index.test.ts. Remove this before actually deploying {{.AppName}}!
+  // TODO: add endpoints here!
+
+  // TODO: remove this endpoint and its associated test.
+  // This endpoint is only here to demonstrate how to mock fetch in
+  // index.test.ts.
   app.get('/api/fetch_clever_website', async (req, res) => {
     const resp = await fetch('https://clever.com');
     const text = await resp.text();
     res.send(text);
   });
 
+  // catch-all route to serve the UI, if no API endpoints above match.
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', '..', 'ui', 'index.html'));
   });

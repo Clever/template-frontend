@@ -11,6 +11,7 @@ export default function routes() {
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
+        {/* TODO: add more page routes here */}
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
