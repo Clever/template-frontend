@@ -1,0 +1,69 @@
+@import "~clever-components/dist/less/fonts";
+@import (reference) "~clever-components/dist/less/index";
+
+// Base Styles //
+
+html, body {
+  .text--medium;
+  color: @neutral_black;
+  font-family: "Proxima Nova";
+  height: 100%;
+  position: relative;
+  list-style-position: inside;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  .text--gargantuan;
+  .text--semi-bold;
+}
+
+h2 {
+  .padding--bottom--s;
+  .text--huge;
+  .text--semi-bold;
+}
+
+h3 {
+  .padding--bottom--s;
+  .text--large;
+  .text--semi-bold;
+}
+
+h4 {
+  .padding--bottom--xs;
+  .text--medium;
+  .text--semi-bold;
+}
+
+a {
+  .text--semi-bold;
+  color: @primary_blue;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    .shade(color, @primary_blue, 2);
+  }
+}
+
+strong {
+  .text--semi-bold;
+}
+
+label {
+  .text--semi-bold;
+  color: @neutral_dark_gray;
+}
+
+p {
+  .margin--bottom--s;
+  .text--line-height-4;
+}

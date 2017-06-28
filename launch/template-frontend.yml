@@ -1,0 +1,24 @@
+env:
+- NODE_ENV
+- HOST
+- PORT
+resources:
+  cpu: 0.1
+  max_mem: 0.1
+shepherds:
+- "{{.CreatorEmail}}"
+expose:
+- name: https
+  load_balancer_proto: https
+  load_balancer_port: 443
+  port: 80
+  health_check:
+    type: http
+    path: /_healthcheck
+- name: http
+  port: 80
+  bind: 80
+  health_check:
+    type: http
+    path: /_healthcheck
+team: "{{.TeamName}}"

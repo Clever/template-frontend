@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "noImplicitAny": false,
+    "jsx": "react",
+    "typeRoots": [
+      "node_modules/@types",
+      "./types"
+    ]
+  },
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-config-airbnb",
+    "tslint-react"
+  ],
+  "rules": {
+    // function-name modified to allow for functions that start with capital
+    // letters, since pure stateless React components are declared that way.
+    "function-name": [
+      true,
+      {
+        // default was "^[a-z][\\w\\d]+$", note the added capital letters
+        "function-regex": "^[a-zA-Z][\\w\\d]+$"
+      }
+    ],
+    // disabled import-name due to this issue:
+    // https://github.com/Microsoft/tslint-microsoft-contrib/issues/378
+    "import-name": [
+      false
+    ],
+    // disabled because it is annoying and not clarifying
+    "ordered-imports": [
+      false
+    ]
+  }
+}
+
