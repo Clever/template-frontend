@@ -1,4 +1,4 @@
-FROM node:6.2.2-slim
+FROM node:8-slim
 
 WORKDIR /{{.AppName}}
 
