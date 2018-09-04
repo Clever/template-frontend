@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Clever/template-frontend
+    working_directory: ~/Clever/{{.AppName}}
     docker:
     - image: circleci/node:8.11.3-stretch
     environment:
