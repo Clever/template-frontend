@@ -17,7 +17,6 @@ expose:
     path: /_healthcheck
 - name: http
   port: 80
-  bind: 80
   health_check:
     type: http
     path: /_healthcheck
