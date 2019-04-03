@@ -9,7 +9,7 @@ import { HomeView } from "./";
 describe("HomeView", () => {
   it("renders a header", () => {
     const rendered = shallow(
-      <HomeView counterValue={{}} incrementCounter={{}} incrementCounterInNSeconds={{}} />
+      <HomeView counter={{}} incrementCounter={{}} incrementCounterInNSeconds={{}} />
     );
     expect(rendered.find("h1").length).toBe(1);
   });

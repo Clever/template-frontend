@@ -10,7 +10,7 @@ import { store } from "../../store";
 import "./index.less";
 
 export function HomeView({
-  counterValue,
+  counter,
   incrementCounter,
   incrementCounterInNSeconds,
 }) {
@@ -20,7 +20,7 @@ export function HomeView({
       <h1>Home</h1>
       <p>Hello world! I'm a single page app.</p>
       <section>
-        <h2>The current value of the counter is {counterValue.value}</h2>
+        <h2>The current value of the counter is {counter.value}</h2>
 
         <div>
           <Button
@@ -41,7 +41,7 @@ export function HomeView({
 
 
 const mapStateToProps = (state) => ({
-  counterValue: selectors.incrementCounter(state),
+  counter: selectors.counter(state),
 });
 
 const mapDispatchToProps = {

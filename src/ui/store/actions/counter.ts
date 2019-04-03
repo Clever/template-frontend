@@ -13,7 +13,7 @@ async function delay(seconds) {
 export const incrementCounterNow = () =>
   async (dispatch, getState) => {
     const currentState = getState();
-    dispatch(incrementCounter({ value: selectors.incrementCounter(currentState).value + 1 }));
+    dispatch(incrementCounter({ value: selectors.counter(currentState).value + 1 }));
   };
 
 export const incrementCounterInNSeconds = (seconds) =>
