@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export default function NotFound() {
   // TODO: define true 404 page content

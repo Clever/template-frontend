@@ -1,8 +1,8 @@
-import 'core-js';
-import 'isomorphic-fetch';
+import "core-js";
+import "isomorphic-fetch";
 
-import { createApp } from './app';
-import { PORT } from '../../config';
+import { createApp } from "./app";
+import { PORT } from "../../config";
 
 createApp().listen(PORT, () => {
   // tslint:disable-next-line:no-console

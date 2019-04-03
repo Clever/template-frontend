@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { browserHistory, Router, Route, IndexRoute } from 'react-router';
+import * as React from "react";
+import { browserHistory, Router, Route, IndexRoute } from "react-router";
 
 /* Pages */
-import Home from './pages/Home';
-import Layout from './pages/Layout';
-import NotFound from './pages/NotFound';
+import { Home } from "./pages/Home";
+import Layout from "./pages/Layout";
+import NotFound from "./pages/NotFound";
 
 export default function routes() {
   return (
