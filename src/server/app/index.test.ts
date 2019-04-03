@@ -1,32 +1,26 @@
-import { createApp } from './';
-import * as supertest from 'supertest';
+import * as assert from "assert";
+import { MainRoutes } from "../../../api/mainRoutes";
 
-describe('server', () => {
-  // this is an example of an integration test using supertest
-  describe('/_healthcheck', () => {
-    it('returns 200', async () => {
-      await supertest(createApp())
-        .get('/_healthcheck')
-        .expect(200);
-    });
-  });
-
+describe("server", () => {
   // TODO: remove this test once the associated endpoint is removed
-  // this is an example of mocking a global using jest
-  describe('/api/fetch_clever_website', () => {
-    it('returns the Clever website', async () => {
-      const mockBody = 'hello world!';
+  describe("/api/fetch_clever_website", () => {
+    it("returns the Clever website", () => {
+      const mockBody = "hello world!";
+      const mockReq = {};
 
       // you can just replace globals with mocks directly since each
-      // test is sandboxed. Casted global to allow modifying it
+      // test is sandboxed
       (global as any).fetch = jest.fn().mockImplementation(async () => (
         { text: async () => mockBody }
       ));
+      const mockRes = {
+        json: (statusCode, data) => {
+          assert.equal(statusCode, 200);
+          assert.equal(data, mockBody);
+        },
+      };
 
-      await supertest(createApp())
-        .get('/api/fetch_clever_website')
-        .expect(200)
-        .expect(mockBody);
+      return new MainRoutes().fetchCleverWebsite(mockReq, mockRes);
     });
   });
 
