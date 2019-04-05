@@ -23,11 +23,11 @@ Et voilà! Visit `localhost:5020` to see everything in action.
 Here are the main files we care about:
 
 ```
-api
-+--- mainRoutes
-     |--- index.ts
 src
 +--- server
+     +--- api
+          +--- mainRoutes
+               |--- index.ts
      +--- app
           |--- index.ts
           |--- index.test.tsx
@@ -49,13 +49,13 @@ src
                |--- index.ts
 ```
 
-`api`: Houses the endpoints that can be called in `src/server/app/index.ts`
+`src/server/api`: Houses the endpoints that can be called in `src/server/app/index.ts`
 
 `src/server/app`: An express app that sets the endpoints up with the respective tests
 
-`ui/pages/Home`: The actual UI
+`src/ui/pages/Home`: The actual UI
 
-`ui/store`: The redux store separated out by `actions`, `reducers`, and `selectors`
+`src/ui/store`: The redux store separated out by `actions`, `reducers`, and `selectors`
 
 
 ## Deploying

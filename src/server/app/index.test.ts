@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { MainRoutes } from "../../../api/mainRoutes";
+import { MainRoutes } from "../api/mainRoutes";
 
 describe("server", () => {
   // TODO: remove this test once the associated endpoint is removed

@@ -4,7 +4,7 @@ import * as bodyParser from "body-parser";
 import * as path from "path";
 import * as kayvee from "kayvee";
 import * as discovery from "clever-discovery";
-import { MainRoutes } from "../../../api/mainRoutes";
+import { MainRoutes } from "../api/mainRoutes";
 
 export function createApp() {
   const app = express();
