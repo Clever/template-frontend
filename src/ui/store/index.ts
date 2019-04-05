@@ -1,10 +1,12 @@
-import { combineReducers, createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension/developmentOnly';
+import { enableBatching } from "clever-frontend-utils";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { devToolsEnhancer } from "redux-devtools-extension/developmentOnly";
+import thunkMiddleware from "redux-thunk";
 
-import * as counter from './counter/reducer';
+import * as reducers from "./reducers";
 
-export const reducer = combineReducers({
-  [counter.storeKey]: counter.reducer,
-});
-
-export default createStore(reducer, devToolsEnhancer({}));
+const appReducer = enableBatching(combineReducers({ ...reducers }));
+export const store = createStore(appReducer, compose(
+  applyMiddleware(thunkMiddleware),
+  devToolsEnhancer({}),
+));
