@@ -1,30 +1,24 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-import { connect, Provider } from "react-redux";
+import { connect } from "react-redux";
 import { Button } from "clever-components";
-import * as actions from "../../store/actions";
-import * as selectors from "../../store/selectors";
-
-import { store } from "../../store";
+import { actions, selectors } from "../../store";
 
 import "./index.less";
 
 export function HomeView({
   counter,
-  incrementCounter,
+  incrementCounterNow,
   incrementCounterInNSeconds,
 }) {
-  // TODO: flesh out true home page
   return (
     <div className="pages--Home">
       <h1>Home</h1>
       <p>Hello world! I'm a single page app.</p>
       <section>
-        <h2>The current value of the counter is {counter.value}</h2>
-
+        <h2>The current value of the counter is {counter}</h2>
         <div>
           <Button
-            onClick={incrementCounter}
+            onClick={() => incrementCounterNow()}
             value="Increment counter now"
             type="primary"
           />
@@ -39,13 +33,12 @@ export function HomeView({
   );
 }
 
-
 const mapStateToProps = (state) => ({
   counter: selectors.counter(state),
 });
 
 const mapDispatchToProps = {
-  incrementCounter: actions.incrementCounterNow,
+  incrementCounterNow: actions.incrementCounterNow,
   incrementCounterInNSeconds: actions.incrementCounterInNSeconds,
 };
 
