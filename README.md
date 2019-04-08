@@ -38,15 +38,8 @@ src
                |--- index.less
                |--- index.test.tsx
      +--- store
-          +--- actions
-               |--- counter.ts
-               |--- index.ts
-          +--- reducers
-               |--- counter.ts
-               |--- index.ts
-          +--- selectors
-               |--- counter.ts
-               |--- index.ts
+          +--- counter.ts
+          +--- index.ts
 ```
 
 `src/server/api`: Houses the endpoints that can be called in `src/server/app/index.ts`
@@ -55,8 +48,7 @@ src
 
 `src/ui/pages/Home`: The actual UI
 
-`src/ui/store`: The redux store separated out by `actions`, `reducers`, and `selectors`
-
+`src/ui/store`: The Redux store, where each Redux collection has its own file
 
 ## Deploying
 
@@ -66,7 +58,6 @@ You will need to populate the initial `ark-config` branch with the following env
 - `PORT`
 
 Then you can run with the standard `ark` command:
-
 
 ```
 ark start {{.AppName}}
