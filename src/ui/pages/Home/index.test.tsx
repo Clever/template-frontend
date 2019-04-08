@@ -1,7 +1,6 @@
 import * as React from "react";
 import { shallow } from "enzyme";
 
-import { store } from "../../store";
 import { HomeView } from "./";
 
 // TODO: add more UI tests for rendered Home page
@@ -9,7 +8,11 @@ import { HomeView } from "./";
 describe("HomeView", () => {
   it("renders a header", () => {
     const rendered = shallow(
-      <HomeView counter={{}} incrementCounter={{}} incrementCounterInNSeconds={{}} />
+      <HomeView
+        counter={0}
+        incrementCounterNow={() => null}
+        incrementCounterInNSeconds={() => null}
+      />
     );
     expect(rendered.find("h1").length).toBe(1);
   });
