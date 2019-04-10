@@ -9,7 +9,7 @@
     "body-parser": "^1.17.0",
     "clever-components": "1.8.0",
     "clever-discovery": "0.0.8",
-    "clever-frontend-utils": "^0.7.0",
+    "clever-frontend-utils": "^1.1.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "es6-promise": "^4.0.5",
