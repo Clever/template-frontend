@@ -7,5 +7,5 @@ import Router from "./Router";
 
 render(
   <Provider store={store}><Router /></Provider>,
-  document.getElementById("app"),
+  document.getElementById("__REACT_APP__"),
 );
