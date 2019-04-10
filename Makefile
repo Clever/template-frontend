@@ -28,4 +28,4 @@ build: copy_static_assets
 	./node_modules/webpack/bin/webpack.js
 
 run: copy_static_assets
-	node_modules/webpack/bin/webpack.js --watch & ./node_modules/nodemon/bin/nodemon.js -e .ts,jsx,tsx,less --watch src/server/**/*.[jt]sx? --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node ./src/server/index.ts'
+	node_modules/webpack/bin/webpack.js --watch & ./node_modules/nodemon/bin/nodemon.js -e .ts,jsx,tsx,less --watch src/server/**/*.[jt]sx? --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node --require tsconfig-paths/register ./src/server/index.ts'

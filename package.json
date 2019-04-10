@@ -48,6 +48,7 @@
     "stylelint": "^7.10.1",
     "ts-jest": "^20.0.5",
     "ts-loader": "^2.0.1",
+    "tsconfig-paths": "^3.8.0",
     "tslint": "^5.4.3",
     "tslint-config-airbnb": "^5.0.1",
     "tslint-react": "^3.0.0",

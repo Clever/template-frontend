@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
     "noImplicitAny": false,
+    "lib": ["es2017", "dom"],
     "jsx": "react",
-    "typeRoots": [
-      "node_modules/@types",
-      "./types"
-    ]
+    "downlevelIteration": true,
+    "typeRoots": ["node_modules/@types", "./types"],
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
