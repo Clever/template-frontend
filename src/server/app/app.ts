@@ -1,5 +1,6 @@
 import { HttpMethod, patchExpressForPromises } from "clever-frontend-utils";
 import * as bodyParser from "body-parser";
+import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as path from "path";
@@ -17,6 +18,7 @@ export function createApp() {
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(compression());
 
   app.use(express.static(path.join(__dirname, "..", "..", "..", "__build")));
 
