@@ -1,4 +1,4 @@
-// import { Clients } from "../Clients";
+import { Clients } from "../Clients";
 import { ValidationError } from "src/server/app/errors";
 import { KrabbyPatty, Sauce } from "src/shared/models";
 
@@ -7,7 +7,7 @@ interface KrabbyPattyOptions {
 }
 
 // Modules can build off of backend WAG clients and other modules
-export class KrabbyPattyModule {
+export class KrabbyPattyLib {
   async makeKrabbyPatty(options: KrabbyPattyOptions) {
     if (!options.sauces || !options.sauces.includes(Sauce.SECRET_FORMULA)) {
       throw new ValidationError("Can't forget the secret formula!", 1);

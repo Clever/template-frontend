@@ -4,7 +4,7 @@ import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as path from "path";
 
-import { Clients } from "src/server/modules";
+import { Clients } from "src/server/lib";
 import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";

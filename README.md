@@ -28,8 +28,8 @@ src
 │   ├── api
 │   ├── app
 │   ├── auth
+│   ├── lib
 │   ├── middleware
-│   ├── modules
 │   └── pages
 ├── shared
 │   └── models
@@ -48,9 +48,9 @@ src
 
 -----
 
-`src/server/middleware`: Houses middlewares
+`src/server/lib`: Houses frontend server libs for shared logic as well as a `Clients` class for easy access to those libs and backend WAG clients
 
-`src/server/modules`: Houses frontend server modules for shared logic as well as a `Clients` class for easy access to those modules and backend WAG clients
+`src/server/middleware`: Houses middlewares
 
 -----
 
