@@ -10,8 +10,9 @@ import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { LandingPageEndpoint } from "src/server/pages";
+import { PORT } from "../../../config";
 
-export function createApp() {
+export function startServer() {
   const app = express();
   patchExpressForPromises(app);
 
@@ -19,7 +20,6 @@ export function createApp() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(compression());
-
   app.use(express.static(path.join(__dirname, "..", "..", "..", "__build")));
 
   // Etags aren't properly handled by all browsers so we outright disable all caching on
@@ -45,5 +45,9 @@ export function createApp() {
 
   app.use(errorHandler);
 
-  return app;
+  // Start the server
+  app.listen(PORT, () => {
+    // tslint:disable-next-line:no-console
+    console.log(`Listening on port ${PORT}...`);
+  });
 }
