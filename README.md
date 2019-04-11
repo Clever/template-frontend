@@ -20,35 +20,53 @@ Et voilà! Visit `localhost:5020` to see everything in action.
 
 ## File structure
 
-Here are the main files we care about:
+Here's the top-level directory structure.
 
 ```
 src
-+--- server
-     +--- api
-          +--- mainRoutes
-               |--- index.ts
-     +--- app
-          |--- index.ts
-          |--- index.test.tsx
-+--- ui
-     +--- pages
-          +--- Home
-               |--- index.tsx
-               |--- index.less
-               |--- index.test.tsx
-     +--- store
-          +--- counter.ts
-          +--- index.ts
+├── server
+│   ├── api
+│   ├── app
+│   ├── auth
+│   ├── middleware
+│   ├── modules
+│   └── pages
+├── shared
+│   └── models
+└── ui
+    ├── pages
+    └── store
 ```
 
-`src/server/api`: Houses the endpoints that can be called in `src/server/app/index.ts`
+### Server
 
-`src/server/app`: An express app that sets the endpoints up with the respective tests
+`src/server/api`: Houses API endpoints
 
-`src/ui/pages/Home`: The actual UI
+`src/server/pages`: Houses page-serving endpoints and base views
+
+`src/server/auth`: Houses authentication endpoints
+
+-----
+
+`src/server/middleware`: Houses middlewares
+
+`src/server/modules`: Houses frontend server modules for shared logic as well as a `Clients` class for easy access to those modules and backend WAG clients
+
+-----
+
+`src/server/app`: Sets up the Express app
+
+`src/server/app/errors`: Provides typed errors for use throughout the server
+
+### Client
+
+`src/ui/pages`: The actual UI
 
 `src/ui/store`: The Redux store, where each Redux collection has its own file
+
+### Shared
+
+`src/shared/models`: Houses data models to be shared across the server and client
 
 ## Deploying
 
