@@ -1,5 +1,6 @@
 const path = require("path");
 const autoprefixer = require("autoprefixer");
+const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 
 module.exports = {
   entry: ["core-js", "isomorphic-fetch", "./src/ui/index.tsx"],
@@ -57,6 +58,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx", ".less"]
+    extensions: [".js", ".ts", ".tsx", ".less"],
+    plugins: [
+      new TsConfigPathsPlugin(),
+    ]
   }
 };
