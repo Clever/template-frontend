@@ -36,6 +36,7 @@
     "@types/enzyme": "^2.8.0",
     "@types/jest": "^19.2.4",
     "autoprefixer": "^6.7.6",
+    "awesome-typescript-loader": "^3.1.2",
     "css-loader": "^0.26.2",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.7.0",
