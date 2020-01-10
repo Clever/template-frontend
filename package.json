@@ -16,7 +16,7 @@
     "es6-promise": "^4.0.5",
     "express": "^4.15.0",
     "isomorphic-fetch": "^2.2.1",
-    "kayvee": "^3.8.2",
+    "kayvee": "^3.13.0",
     "less": "^2.7.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
