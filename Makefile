@@ -1,6 +1,6 @@
 include node.mk
 
-NODE_VERSION := "v10"
+NODE_VERSION := "v12"
 SHELL := /bin/bash
 
 $(eval $(call node-version-check,$(NODE_VERSION)))
