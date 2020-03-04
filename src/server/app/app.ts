@@ -11,6 +11,7 @@ import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { LandingPageEndpoint } from "src/server/pages";
 import { PORT } from "../../../config";
+import { csrfProtectionMiddleware } from "../middleware";
 
 export function startServer() {
   const app = express();
@@ -36,6 +37,9 @@ export function startServer() {
   });
 
   Clients.initialize();
+
+  // Run CSRF middleware before routing for other endpoints
+  app.use(csrfProtectionMiddleware);
 
   installAuthEndpoints(app);
   installApiEndpoints(app);
