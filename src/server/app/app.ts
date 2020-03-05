@@ -4,6 +4,7 @@ import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as path from "path";
+import * as kayvee from "kayvee";
 
 import { Clients } from "src/server/lib";
 import { errorHandler } from "./errors/errorHandler";
@@ -14,6 +15,11 @@ import { PORT } from "../../../config";
 import { csrfProtectionMiddleware } from "../middleware";
 
 export function startServer() {
+  // env vars are guaranteed by our deployment system
+  const isLocal = process.env._IS_LOCAL === "true";
+  const logger = new kayvee.logger(process.env._APP_NAME);
+  kayvee.setGlobalRouting(path.join(__dirname, "kvconfig.yml"));
+
   const app = express();
   patchExpressForPromises(app);
 
@@ -50,8 +56,22 @@ export function startServer() {
   app.use(errorHandler);
 
   // Start the server
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     // tslint:disable-next-line:no-console
     console.log(`Listening on port ${PORT}...`);
+
+    // Our SIGTERM handler breaks server code watch functionality, so let's skip setting it up
+    // when running locally
+    if (isLocal) {
+      return;
+    }
+
+    process.on("SIGTERM", () => {
+      logger.info("sigterm-received");
+      server.close(() => {
+        logger.info("exiting");
+        process.exit(0);
+      });
+    });
   });
 }
