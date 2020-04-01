@@ -18,7 +18,7 @@ team: "{{.TeamName}}"
 #    link: https://github.com/Clever/catapult/blob/master/swagger.yml
 alarms:
 - type: InternalErrorAlarm
-  # channel: default channel for this team and severity
+  # channel: default channel for this team and severity https://github.com/Clever/catapult/blob/master/scripts/addteams.sh
   severity: major
   parameters:
     threshold: 0.05
