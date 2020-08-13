@@ -48,7 +48,7 @@ alarms:
   severity: major
   paramaters:
     threshold: 0.15
-  extraParamters:
+  extraParameters:
     errorMinimum: 20
 - type: BadRequestAlarm
   severity: minor
