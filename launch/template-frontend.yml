@@ -46,7 +46,7 @@ alarms:
     source: Total
 - type: BadRequestAlarm
   severity: major
-  paramaters:
+  parameters:
     threshold: 0.15
   extraParameters:
     errorMinimum: 20
