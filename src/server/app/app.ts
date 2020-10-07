@@ -11,7 +11,7 @@ import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { LandingPageEndpoint } from "src/server/pages";
-import { PORT } from "../../../config";
+import { PORT } from "../config";
 import { csrfProtectionMiddleware } from "../middleware";
 
 export function startServer() {
