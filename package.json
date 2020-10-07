@@ -55,23 +55,5 @@
     "tslint-react": "^3.0.0",
     "typescript": "^3.6.4",
     "url-loader": "^0.5.8"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": ".+test.+(ts|tsx|js)",
-    "setupFiles": [
-      "./jest_scripts/setup.js"
-    ],
-    "moduleNameMapper": {
-      ".*(css|less|png|svg)$": "<rootDir>/jest_scripts/staticImportStub.js"
-    }
   }
 }
