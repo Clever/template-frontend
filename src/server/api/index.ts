@@ -7,10 +7,13 @@ import { GetKrabbyPattyEndpoint } from "./foods/GetKrabbyPattyEndpoint";
 import { MakeKrabbyPattyEndpoint } from "./foods/MakeKrabbyPattyEndpoint";
 
 export function installApiEndpoints(app) {
-  (new GetCharacterEndpoint()).install(app, HttpMethod.GET, "/api/characters/:characterID");
+  new GetCharacterEndpoint().install(app, HttpMethod.GET, "/api/characters/:characterID");
 
-  (new GetKrabbyPattiesEndpoint()).install(app, HttpMethod.GET, "/api/foods/krabbyPatties");
-  (new GetKrabbyPattyEndpoint()).install(
-    app, HttpMethod.GET, "/api/foods/krabbyPatties/:krabbyPattyID");
-  (new MakeKrabbyPattyEndpoint()).install(app, HttpMethod.POST, "/api/foods/krabbyPatties");
+  new GetKrabbyPattiesEndpoint().install(app, HttpMethod.GET, "/api/foods/krabbyPatties");
+  new GetKrabbyPattyEndpoint().install(
+    app,
+    HttpMethod.GET,
+    "/api/foods/krabbyPatties/:krabbyPattyID",
+  );
+  new MakeKrabbyPattyEndpoint().install(app, HttpMethod.POST, "/api/foods/krabbyPatties");
 }

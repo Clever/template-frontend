@@ -28,7 +28,7 @@ export class KrabbyPattyLib {
 
         // This piece of data will get filtered out by the `KrabbyPatty` data model
         expectedResponseOnConsumption: "Yum",
-      }
+      },
     };
 
     return new KrabbyPatty(response.krabbyPatty);

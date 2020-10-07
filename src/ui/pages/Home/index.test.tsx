@@ -10,7 +10,7 @@ describe("Home", () => {
         counter={0}
         incrementCounterNow={() => null}
         incrementCounterInNSeconds={() => null}
-      />
+      />,
     );
     expect(result.getByText("Home")).toBeVisible();
   });

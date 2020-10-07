@@ -14,25 +14,25 @@ const { getAppURL } = require("../lib/helpers");
  * applications to use the library middleware instead of their unique CSRF middleware.
  */
 export const csrfProtectionMiddleware = (req, res, next) => {
-    if (["POST", "PATCH", "DELETE", "PUT"].includes(req.method)) {
-      const parsedAppURL = url.parse(getAppURL());
-      const expectedOrigin = `${parsedAppURL.protocol}//${parsedAppURL.host}`;
+  if (["POST", "PATCH", "DELETE", "PUT"].includes(req.method)) {
+    const parsedAppURL = url.parse(getAppURL());
+    const expectedOrigin = `${parsedAppURL.protocol}//${parsedAppURL.host}`;
 
-      if (req.headers.origin) {
-        if (req.headers.origin === expectedOrigin) {
-          next();
-          return;
-        }
-      } else if (typeof req.headers.referer === "string") {
-        // IE11 and Edge do not send origin headers by default for same-origin requests, so fall
-        // back to the referer.
-        const { host, protocol } = url.parse(req.headers.referer);
-        if (`${protocol}//${host}` === expectedOrigin) {
-          next();
-          return;
-        }
+    if (req.headers.origin) {
+      if (req.headers.origin === expectedOrigin) {
+        next();
+        return;
       }
-      /** TODO: Log CSRF failure 
+    } else if (typeof req.headers.referer === "string") {
+      // IE11 and Edge do not send origin headers by default for same-origin requests, so fall
+      // back to the referer.
+      const { host, protocol } = url.parse(req.headers.referer);
+      if (`${protocol}//${host}` === expectedOrigin) {
+        next();
+        return;
+      }
+    }
+    /** TODO: Log CSRF failure 
       logger.warnD("csrf_failure", {
         method: req.method,
         url: req.url,
@@ -41,8 +41,8 @@ export const csrfProtectionMiddleware = (req, res, next) => {
         agent: req.headers["user-agent"],
       });
       */
-      res.sendStatus(403);
-    } else {
-      next();
-    }
+    res.sendStatus(403);
+  } else {
+    next();
+  }
 };

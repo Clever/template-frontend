@@ -24,7 +24,7 @@ export class GetCharacterEndpoint extends ApiEndpoint {
         },
         species: "sponge",
         livesInAPineappleUnderTheSea: true,
-      }
+      },
     };
 
     const character = new Character(response.character);

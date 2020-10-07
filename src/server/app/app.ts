@@ -51,7 +51,7 @@ export function startServer() {
   installApiEndpoints(app);
 
   // Catch-all route to serve the UI, if no auth or API endpoints above match
-  (new LandingPageEndpoint()).install(app, HttpMethod.GET, "*");
+  new LandingPageEndpoint().install(app, HttpMethod.GET, "*");
 
   app.use(errorHandler);
 

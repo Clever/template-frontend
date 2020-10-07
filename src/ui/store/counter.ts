@@ -41,6 +41,9 @@ export const actions = {
 
 export const storeKey = "counter";
 
-export const reducer = handleActions({
-  [internalActions.incrementCounter]: newAsyncDataReducer(),
-}, {});
+export const reducer = handleActions(
+  {
+    [internalActions.incrementCounter]: newAsyncDataReducer(),
+  },
+  {},
+);

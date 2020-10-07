@@ -5,11 +5,7 @@ import { actions, selectors } from "../../store";
 
 import "./index.less";
 
-export function HomeView({
-  counter,
-  incrementCounterNow,
-  incrementCounterInNSeconds,
-}) {
+export function HomeView({ counter, incrementCounterNow, incrementCounterInNSeconds }) {
   return (
     <div className="pages--Home">
       <h1>Home</h1>
