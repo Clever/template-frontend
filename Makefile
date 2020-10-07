@@ -17,7 +17,7 @@ lint:
 	./node_modules/.bin/stylelint --config ./.stylelintrc $(LESS_FILES)
 
 test:
-	./node_modules/.bin/jest
+	./node_modules/.bin/jest --maxWorkers=1
 
 copy_static_assets:
 	rm -rf ./__build
