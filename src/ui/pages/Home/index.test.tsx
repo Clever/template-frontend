@@ -1,19 +1,17 @@
 import * as React from "react";
-import { shallow } from "enzyme";
+import { render } from "@testing-library/react";
 
 import { HomeView } from "./";
 
-// TODO: add more UI tests for rendered Home page
-
-describe("HomeView", () => {
-  it("renders a header", () => {
-    const rendered = shallow(
+describe("Home", () => {
+  it("Renders a header", () => {
+    const result = render(
       <HomeView
         counter={0}
         incrementCounterNow={() => null}
         incrementCounterInNSeconds={() => null}
       />
     );
-    expect(rendered.find("h1").length).toBe(1);
+    expect(result.getByText("Home")).toBeVisible();
   });
 });
