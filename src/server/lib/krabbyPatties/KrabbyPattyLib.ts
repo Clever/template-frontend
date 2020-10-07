@@ -1,4 +1,3 @@
-import { Clients } from "../Clients";
 import { ValidationError } from "src/server/app/errors";
 import { KrabbyPatty, Sauce } from "src/shared/models";
 

@@ -1,5 +1,6 @@
 import * as url from "url";
-const { getAppURL } = require("../lib/helpers");
+
+import { getAppURL } from "../lib/helpers";
 
 /**
  * CSRF protection - ensure that state changing requests originate from us (our origin) or, as a
@@ -41,7 +42,7 @@ export const csrfProtectionMiddleware = (req, res, next) => {
         agent: req.headers["user-agent"],
       });
       */
-    res.sendStatus(403);
+    res.sendStatus(403); // eslint-disable-line @clever/no-send-status-error
   } else {
     next();
   }

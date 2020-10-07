@@ -56,8 +56,7 @@ export function startServer() {
   app.use(errorHandler);
 
   // Start the server
-  const server = app.listen(PORT, () => {
-    // tslint:disable-next-line:no-console
+  const server = app.listen(Number(PORT), isLocal ? "localhost" : "0.0.0.0", () => {
     console.log(`Listening on port ${PORT}...`);
 
     // Our SIGTERM handler breaks server code watch functionality, so let's skip setting it up

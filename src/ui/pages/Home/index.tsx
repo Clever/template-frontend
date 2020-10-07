@@ -5,11 +5,17 @@ import { actions, selectors } from "../../store";
 
 import "./index.less";
 
-export function HomeView({ counter, incrementCounterNow, incrementCounterInNSeconds }) {
+interface Props {
+  counter: number;
+  incrementCounterNow: () => void;
+  incrementCounterInNSeconds: (n: number) => void;
+}
+
+export function HomeView({ counter, incrementCounterNow, incrementCounterInNSeconds }: Props) {
   return (
     <div className="pages--Home">
       <h1>Home</h1>
-      <p>Hello world! I'm a single page app.</p>
+      <p>Hello world! I’m a single page app.</p>
       <section>
         <h2>The current value of the counter is {counter}</h2>
         <div>

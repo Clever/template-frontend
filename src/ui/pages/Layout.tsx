@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Wizard } from "clever-components";
 
 import "./App.less";
 

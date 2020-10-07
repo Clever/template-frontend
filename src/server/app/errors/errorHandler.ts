@@ -3,6 +3,10 @@ import * as path from "path";
 import { AuthorizationError, NotFoundError, PermissionError, ValidationError } from "./errors";
 import { EndpointType } from "src/server/middleware";
 
+// We disable the @clever/no-send-status-error in the ErrorHandler since this is where we translate
+// the thrown errors to status codes.
+/* eslint-disable @clever/no-send-status-error */
+
 function serveErrorPage(res, statusCode, message) {
   res.status(statusCode);
   res.locals.message = message;

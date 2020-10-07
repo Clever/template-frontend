@@ -1,6 +1,5 @@
 import { ApiEndpoint } from "../ApiEndpoint";
 import { Character } from "src/shared/models";
-import { Clients } from "src/server/lib";
 import { NotFoundError } from "src/server/app/errors";
 
 export class GetCharacterEndpoint extends ApiEndpoint {
