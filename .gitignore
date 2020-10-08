@@ -7,12 +7,11 @@
 \#*\#
 .\#*
 
-node_modules
-__build
-
 # VSCode
-
 .vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+node_modules
+__build
