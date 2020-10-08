@@ -22,9 +22,7 @@ jobs:
     executor: common-executor
     steps:
     - checkout
-    - run:
-        command: npm install
-        name: npm install
+    - run: npm install
     - run: NODE_ENV=production make build
     - persist_to_workspace:
         root: ~/Clever
@@ -50,6 +48,7 @@ jobs:
         name: Set up CircleCI artifacts directories
     - run: make lint
     - run: make test
+    - run: make type-check-server
   
   deploy:
     executor: common-executor
