@@ -1,19 +1,20 @@
 import * as React from "react";
-import { browserHistory, Router, Route, IndexRoute } from "react-router";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 /* Pages */
 import { Home } from "./pages/Home";
-import Layout from "./pages/Layout";
-import NotFound from "./pages/NotFound";
+import { Layout } from "./pages/Layout";
+import { NotFound } from "./pages/NotFound";
 
 export default function routes() {
   return (
-    <Router history={browserHistory}>
-      <Route path="/" component={Layout}>
-        <IndexRoute component={Home} />
+    <BrowserRouter>
+      <Route path="/" component={Layout} />
+      <Switch>
+        <Route path="/" exact component={Home} />
         {/* TODO: add more page routes here */}
-        <Route path="*" component={NotFound} />
-      </Route>
-    </Router>
+        <Route component={NotFound} />
+      </Switch>
+    </BrowserRouter>
   );
 }
