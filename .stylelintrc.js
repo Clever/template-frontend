@@ -1,12 +1,12 @@
 module.exports = {
   extends: [
     // https://prettier.io/docs/en/integrating-with-linters.html#recommended-configuration-2
-    "stylelint-prettier/recommended",
+    "stylelint-config-prettier",
   ],
   rules: {
     "block-no-empty": null,
     "color-no-invalid-hex": true,
-    "declaration-property-value-whitelist": {
+    "declaration-property-value-allowed-list": {
       "/color/": [
         "transparent",
         "/@accent_aqua/",
@@ -29,6 +29,6 @@ module.exports = {
     "no-descending-specificity": true,
     "no-duplicate-selectors": true,
     "selector-max-id": 0,
-    "unit-whitelist": ["em", "ms", "rem", "s", "vh", "%"],
+    "unit-allowed-list": ["em", "ms", "rem", "s", "vh", "%"],
   },
 };
