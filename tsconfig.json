@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "noImplicitAny": false,
-    "lib": ["es2017", "dom"],
-    "jsx": "react",
-    "downlevelIteration": true,
-    "typeRoots": ["node_modules/@types", "./types"],
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "jsx": "react",
+    "lib": ["dom", "es2019"],
+    "module": "commonjs",
     "paths": {
-      "src/*": ["./src/*"]
-    }
+      "src/*": ["src/*"]
+    },
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es2019",
+    "typeRoots": ["node_modules/@types", "types"]
   },
   "exclude": ["node_modules"]
 }
