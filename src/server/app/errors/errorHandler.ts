@@ -1,12 +1,11 @@
 import * as path from "path";
 
-import {
-  AuthorizationError,
-  NotFoundError,
-  PermissionError,
-  ValidationError,
-} from "./errors";
+import { AuthorizationError, NotFoundError, PermissionError, ValidationError } from "./errors";
 import { EndpointType } from "src/server/middleware";
+
+// We disable the @clever/no-send-status-error in the ErrorHandler since this is where we translate
+// the thrown errors to status codes.
+/* eslint-disable @clever/no-send-status-error */
 
 function serveErrorPage(res, statusCode, message) {
   res.status(statusCode);
@@ -20,7 +19,7 @@ function serveErrorPage(res, statusCode, message) {
 // Express identifies error-handling middleware by number of params (four instead of the typical
 // three)
 export const errorHandler = (err, req, res, next) => {
-  const endpointServesJson = (req.endpointType === EndpointType.API);
+  const endpointServesJson = req.endpointType === EndpointType.API;
 
   if (err instanceof AuthorizationError) {
     if (endpointServesJson) {

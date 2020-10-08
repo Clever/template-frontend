@@ -1,4 +1,3 @@
-import { Clients } from "../Clients";
 import { ValidationError } from "src/server/app/errors";
 import { KrabbyPatty, Sauce } from "src/shared/models";
 
@@ -28,7 +27,7 @@ export class KrabbyPattyLib {
 
         // This piece of data will get filtered out by the `KrabbyPatty` data model
         expectedResponseOnConsumption: "Yum",
-      }
+      },
     };
 
     return new KrabbyPatty(response.krabbyPatty);

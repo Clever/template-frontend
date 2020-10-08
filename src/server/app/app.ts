@@ -11,7 +11,7 @@ import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { LandingPageEndpoint } from "src/server/pages";
-import { PORT } from "../../../config";
+import { PORT } from "../config";
 import { csrfProtectionMiddleware } from "../middleware";
 
 export function startServer() {
@@ -51,13 +51,12 @@ export function startServer() {
   installApiEndpoints(app);
 
   // Catch-all route to serve the UI, if no auth or API endpoints above match
-  (new LandingPageEndpoint()).install(app, HttpMethod.GET, "*");
+  new LandingPageEndpoint().install(app, HttpMethod.GET, "*");
 
   app.use(errorHandler);
 
   // Start the server
-  const server = app.listen(PORT, () => {
-    // tslint:disable-next-line:no-console
+  const server = app.listen(Number(PORT), isLocal ? "localhost" : "0.0.0.0", () => {
     console.log(`Listening on port ${PORT}...`);
 
     // Our SIGTERM handler breaks server code watch functionality, so let's skip setting it up

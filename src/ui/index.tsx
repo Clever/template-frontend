@@ -6,6 +6,8 @@ import { store } from "./store";
 import Router from "./Router";
 
 render(
-  <Provider store={store}><Router /></Provider>,
+  <Provider store={store}>
+    <Router />
+  </Provider>,
   document.getElementById("__REACT_APP__"),
 );

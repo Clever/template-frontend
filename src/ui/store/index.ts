@@ -5,14 +5,16 @@ import thunkMiddleware from "redux-thunk";
 
 import * as counter from "./counter";
 
-const appReducer = enableBatching(combineReducers({
-  [counter.storeKey]: counter.reducer,
-}));
+const appReducer = enableBatching(
+  combineReducers({
+    [counter.storeKey]: counter.reducer,
+  }),
+);
 
-export const store = createStore(appReducer, compose(
-  applyMiddleware(thunkMiddleware),
-  devToolsEnhancer({}),
-));
+export const store = createStore(
+  appReducer,
+  compose(applyMiddleware(thunkMiddleware), devToolsEnhancer({})),
+);
 
 export const selectors = {
   ...counter.selectors,
