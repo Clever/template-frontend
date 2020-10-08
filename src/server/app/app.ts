@@ -18,7 +18,7 @@ export function startServer() {
   // env vars are guaranteed by our deployment system
   const isLocal = process.env._IS_LOCAL === "true";
   const logger = new kayvee.logger(process.env._APP_NAME);
-  kayvee.setGlobalRouting(path.join(__dirname, "kvconfig.yml"));
+  kayvee.setGlobalRouting(path.join(__dirname, "..", "..", "..", "kvconfig.yml"));
 
   const app = express();
   patchExpressForPromises(app);

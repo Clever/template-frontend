@@ -1,2 +1,2 @@
-# see go/log-routing for details
-routes:
+# See go/log-routing for details
+routes: {}
