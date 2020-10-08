@@ -15,19 +15,19 @@ const internalActions = {
   incrementCounter: createAction("INCREMENT_COUNTER"),
 };
 
-const incrementCounterNow = () => async (dispatch, getState) => {
+const incrementCounterNow = () => async (dispatch: any, getState: any) => {
   const currentState = getState();
   const newValue = selectors.counter(currentState) + 1;
   dispatch(internalActions.incrementCounter(newValue));
 };
 
-async function delay(seconds) {
+async function delay(seconds: number) {
   return new Promise((resolve) => {
     setTimeout(() => resolve(), seconds * 1000);
   });
 }
 
-const incrementCounterInNSeconds = (seconds) => async (dispatch) => {
+const incrementCounterInNSeconds = (seconds: number) => async (dispatch: any) => {
   await delay(seconds);
   dispatch(incrementCounterNow());
 };

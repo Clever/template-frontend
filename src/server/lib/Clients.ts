@@ -19,8 +19,8 @@ interface ClientMap {
 }
 
 export class Clients {
-  static _krabbyPattyLib;
-  static _spongeBobService;
+  static _krabbyPattyLib: KrabbyPattyLib;
+  static _spongeBobService: any;
 
   static constructWagClientOptions() {
     return {};

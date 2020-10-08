@@ -3,7 +3,8 @@ class FullName {
   middle: string;
   last: string;
 
-  constructor(name) {
+  // Consider replacing this `any` with a more explicit input model
+  constructor(name: any = {}) {
     this.first = name.first || "";
     this.middle = name.middle || "";
     this.last = name.last || "";
@@ -16,7 +17,8 @@ export class Character {
   name: FullName;
   species: string;
 
-  constructor(character) {
+  // Consider replacing this `any` with a more explicit input model
+  constructor(character: any = {}) {
     this.id = character.id || "";
     this.livesInAPineappleUnderTheSea = !!character.livesInAPineappleUnderTheSea;
     this.name = new FullName(character.name || {});

@@ -1,3 +1,4 @@
+import * as express from "express";
 import * as url from "url";
 
 import { getAppURL } from "../lib/helpers";
@@ -14,7 +15,11 @@ import { getAppURL } from "../lib/helpers";
  * TODO: Add this middleware to an external library, and refactor existing frontend
  * applications to use the library middleware instead of their unique CSRF middleware.
  */
-export const csrfProtectionMiddleware = (req, res, next) => {
+export const csrfProtectionMiddleware = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
   if (["POST", "PATCH", "DELETE", "PUT"].includes(req.method)) {
     const parsedAppURL = url.parse(getAppURL());
     const expectedOrigin = `${parsedAppURL.protocol}//${parsedAppURL.host}`;

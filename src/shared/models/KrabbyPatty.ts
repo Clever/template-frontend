@@ -11,7 +11,8 @@ export class KrabbyPatty {
   sauces: Sauce[];
   seasonings: string[];
 
-  constructor(krabbyPatty) {
+  // Consider replacing this `any` with a more explicit input model
+  constructor(krabbyPatty: any = {}) {
     this.cheese = !!krabbyPatty.cheese;
     this.id = krabbyPatty.id || "";
     this.numPickles = krabbyPatty.numPickles || 0;

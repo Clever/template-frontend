@@ -1,4 +1,5 @@
 import { Endpoint } from "clever-frontend-utils";
+import * as express from "express";
 import * as path from "path";
 
 import {
@@ -18,7 +19,7 @@ export class LandingPageEndpoint extends Endpoint {
     // this.addMiddleware(initialDataMiddleware());
   }
 
-  async handler(req, res) {
+  async handler(req: express.Request, res: express.Response) {
     // TODO: Replace this static file with a template that can have server-injected content
     // res.render("index.pug");
     res.sendFile(path.resolve(__dirname, "views", "index.html"));
