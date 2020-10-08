@@ -33,11 +33,15 @@ lint-es:
 	@$(ESLINT) $(TS_FILES)
 
 lint-fix:
-	@echo "Running eslint..."
+	@echo "Running eslint --fix..."
 	@$(ESLINT) --fix $(TS_FILES) || \
 		(echo "\033[0;31mThe above errors require manual fixing.\033[0m" && true)
 
-lint: format-check lint-es
+lint-style:
+	@echo "Running stylelint..."
+	@./node_modules/.bin/stylelint $(LESS_FILES)
+
+lint: format-check lint-es lint-style
 
 test:
 	@./node_modules/.bin/jest --passWithNoTests --maxWorkers=1
