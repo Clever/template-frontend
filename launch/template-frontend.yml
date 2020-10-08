@@ -14,9 +14,9 @@ expose:
     type: http
     path: /_healthcheck
 team: "{{.TeamName}}"
-# for the full spec on alarms, see catapult's swagger.yml definition for Alarm
-#    link: https://github.com/Clever/catapult/blob/master/swagger.yml
-#    best practices: https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices
+# For the full spec on alarms, see catapult's swagger.yml definition for Alarm.
+# Link: https://github.com/Clever/catapult/blob/master/swagger.yml
+# Best practices: https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices
 alarms:
 - type: InternalErrorAlarm
   severity: critical
