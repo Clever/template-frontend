@@ -1,8 +1,7 @@
 FROM node:12-slim
 
 WORKDIR /{{.AppName}}
-
 COPY . /{{.AppName}}
 RUN npm install
 
-CMD ./node_modules/.bin/ts-node --require tsconfig-paths/register src/server/index.ts
+CMD NODE_ENV=production NODE_OPTIONS="$_CLEVER_DEFAULT_NODE_OPTIONS" ./scripts/startServer.sh

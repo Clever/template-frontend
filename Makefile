@@ -12,8 +12,10 @@ MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILE
 
 ESLINT := ./node_modules/.bin/eslint
 JEST := ./node_modules/.bin/jest
+NODEMON := ./node_modules/.bin/nodemon
 PRETTIER := ./node_modules/.bin/prettier
 STYLELINT := ./node_modules/.bin/stylelint
+WEBPACK := ./node_modules/.bin/webpack
 
 .PHONY: format format-all format-check lint-es lint-fix lint test type-check-server copy-static-assets build run
 
@@ -59,7 +61,7 @@ copy-static-assets:
 	@cp -r ./public/* ./build
 
 build: copy-static-assets
-	@./node_modules/webpack/bin/webpack.js
+	@$(WEBPACK)
 
 run: copy-static-assets
-	@node_modules/webpack/bin/webpack.js --watch & ./node_modules/.bin/nodemon --watch src/server --watch src/shared -e ts --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node --require tsconfig-paths/register ./src/server/index.ts'
+	@$(WEBPACK) --watch & $(NODEMON) --watch ./src/server/ --watch ./src/shared/ -e ts --exec 'NODE_ENV=development ./scripts/startServer.sh'
