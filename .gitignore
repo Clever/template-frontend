@@ -13,5 +13,5 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+build
 node_modules
-__build

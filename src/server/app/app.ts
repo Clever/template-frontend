@@ -24,15 +24,16 @@ export function startServer() {
   patchExpressForPromises(app);
 
   const viewsDir = path.join(__dirname, "..", "..", "..", "src/server/pages/views");
+  const builtViewsDir = path.join(__dirname, "..", "..", "..", "build/views");
   app.set("view engine", "pug");
-  app.set("views", viewsDir);
+  app.set("views", [viewsDir, builtViewsDir]);
   app.locals.basedir = viewsDir;
 
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(compression());
-  app.use(express.static(path.join(__dirname, "..", "..", "..", "__build")));
+  app.use(express.static(path.join(__dirname, "..", "..", "..", "build")));
 
   // Etags aren't properly handled by all browsers so we outright disable all caching on
   // our API methods.

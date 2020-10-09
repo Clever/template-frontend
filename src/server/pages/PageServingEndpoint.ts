@@ -19,6 +19,6 @@ export class PageServingEndpoint extends Endpoint {
 
   async handler(req: express.Request, res: express.Response) {
     res.locals.initialData = await constructInitialData(req, res);
-    res.render("index");
+    res.render("app");
   }
 }
