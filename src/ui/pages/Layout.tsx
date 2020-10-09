@@ -4,7 +4,7 @@ import "./App.less";
 
 interface Props {}
 
-export default class Layout extends React.Component<Props> {
+export class Layout extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
