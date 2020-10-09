@@ -63,7 +63,6 @@ jobs:
         command: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: make lint
     - run: make test
-    - run: make type-check-server
   
   deploy:
     executor: common-executor

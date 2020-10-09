@@ -17,7 +17,7 @@ PRETTIER := ./node_modules/.bin/prettier
 STYLELINT := ./node_modules/.bin/stylelint
 WEBPACK := ./node_modules/.bin/webpack
 
-.PHONY: format format-all format-check lint-es lint-fix lint test type-check-server copy-static-assets build run
+.PHONY: format format-all format-check lint-es lint-fix lint-style lint test-jest type-check-server test copy-static-assets build run
 
 format:
 	@echo "Formatting modified files..."
@@ -47,13 +47,16 @@ lint-style:
 
 lint: format-check lint-es lint-style
 
-test:
+test-jest:
+	@echo "Running jest..."
 	@IS_TEST=1 $(JEST) --passWithNoTests --maxWorkers=1
 
 # Note that we don't need a separate command for type checking the client. Webpack handles that
 type-check-server:
 	@echo "Type checking server..."
 	@./scripts/typeCheckServer.sh
+
+test: test-jest type-check-server
 
 copy-static-assets:
 	@rm -rf ./build
