@@ -48,7 +48,7 @@ lint-style:
 lint: format-check lint-es lint-style
 
 test:
-	@$(JEST) --passWithNoTests --maxWorkers=1
+	@IS_TEST=1 $(JEST) --passWithNoTests --maxWorkers=1
 
 # Note that we don't need a separate command for type checking the client. Webpack handles that
 type-check-server:
