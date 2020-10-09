@@ -2,8 +2,10 @@ import * as React from "react";
 
 import "./App.less";
 
-export default class Layout extends React.Component<any, any> {
-  constructor(props) {
+interface Props {}
+
+export default class Layout extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
   }
 

@@ -11,9 +11,11 @@ FORMATTED_FILES := $(TS_FILES) $(LESS_FILES) # Add other file types as you see f
 MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILES))
 
 ESLINT := ./node_modules/.bin/eslint
+JEST := ./node_modules/.bin/jest
 PRETTIER := ./node_modules/.bin/prettier
+STYLELINT := ./node_modules/.bin/stylelint
 
-.PHONY: format format-all format-check lint-es lint-fix lint test copy-static-assets build run
+.PHONY: format format-all format-check lint-es lint-fix lint test type-check-server copy-static-assets build run
 
 format:
 	@echo "Formatting modified files..."
@@ -39,12 +41,17 @@ lint-fix:
 
 lint-style:
 	@echo "Running stylelint..."
-	@./node_modules/.bin/stylelint $(LESS_FILES)
+	@$(STYLELINT) $(LESS_FILES)
 
 lint: format-check lint-es lint-style
 
 test:
-	@./node_modules/.bin/jest --passWithNoTests --maxWorkers=1
+	@$(JEST) --passWithNoTests --maxWorkers=1
+
+# Note that we don't need a separate command for type checking the client. Webpack handles that
+type-check-server:
+	@echo "Type checking server..."
+	@./scripts/typeCheckServer.sh
 
 copy-static-assets:
 	@rm -rf ./__build

@@ -1,9 +1,11 @@
+import * as express from "express";
+
 import { ApiEndpoint } from "../ApiEndpoint";
 import { Character } from "src/shared/models";
 import { NotFoundError } from "src/server/app/errors";
 
 export class GetCharacterEndpoint extends ApiEndpoint {
-  async handler(req, res) {
+  async handler(req: express.Request, res: express.Response) {
     const { characterID } = req.params;
 
     if (characterID !== "spongebob") {

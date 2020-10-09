@@ -57,14 +57,19 @@ module.exports = {
     ],
     // Rely on @typescript-eslint/no-unused-vars instead
     "no-unused-vars": ["off"],
-    "@typescript-eslint/camelcase": ["error", { ignoreImports: true, properties: "never" }],
+    "@clever/no-app-listen-without-localhost": "error",
+    "@clever/no-send-status-error": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      { format: ["camelCase", "PascalCase", "UPPER_CASE"], selector: "default" },
+      { format: null, selector: "property" },
+    ],
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["error", { args: "none" }],
     "@typescript-eslint/no-use-before-define": "off",
-    "@clever/no-send-status-error": "error",
-    "@clever/no-app-listen-without-localhost": "error",
   },
   settings: {
     react: {

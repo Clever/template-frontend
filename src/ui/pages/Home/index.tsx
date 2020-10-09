@@ -35,7 +35,7 @@ export function HomeView({ counter, incrementCounterNow, incrementCounterInNSeco
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   counter: selectors.counter(state),
 });
 

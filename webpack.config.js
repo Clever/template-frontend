@@ -41,8 +41,8 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              ignoreDiagnostics: [2307]
-            }
+              configFile: "tsconfig.client.json",
+            },
           }
         ]
       },
