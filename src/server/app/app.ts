@@ -23,6 +23,11 @@ export function startServer() {
   const app = express();
   patchExpressForPromises(app);
 
+  const viewsDir = path.join(__dirname, "..", "..", "..", "src/server/pages/views");
+  app.set("view engine", "pug");
+  app.set("views", viewsDir);
+  app.locals.basedir = viewsDir;
+
   app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,8 +40,6 @@ export function startServer() {
     res.header("Cache-Control", "no-cache");
     next();
   });
-
-  app.set("views", `${__dirname}/src/server/pages/views`);
 
   app.get("/_healthcheck", (req, res) => {
     res.sendStatus(200);
