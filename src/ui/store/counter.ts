@@ -1,6 +1,9 @@
 import { createAction, handleActions } from "redux-actions";
 import { newAsyncDataReducer, newAsyncDataSelectors } from "clever-frontend-utils";
 
+// TODO: If you plan to continue using Redux, consider figuring out how to better type the Redux
+// store.
+
 // ========== Selectors ==========
 
 const generatedSelectors = newAsyncDataSelectors("counter", { itemDefault: 0 });
