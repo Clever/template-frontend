@@ -1,6 +1,7 @@
 import { Endpoint } from "clever-frontend-utils";
 import * as express from "express";
 
+import { constructInitialData } from "src/server/lib/initialData";
 import {
   EndpointType,
   endpointTypeMiddleware,
@@ -14,12 +15,10 @@ export class LandingPageEndpoint extends Endpoint {
     super();
     this.addMiddleware(endpointTypeMiddleware(EndpointType.PAGE_SERVING));
     this.addMiddleware(userLoggedInMiddleware());
-    // TODO: Set up the initial-data pattern for pre-fetching data on page load
-    // this.addMiddleware(initialDataMiddleware());
   }
 
   async handler(req: express.Request, res: express.Response) {
-    // TODO: Replace this static file with a template that can have server-injected content
+    res.locals.initialData = await constructInitialData(req, res);
     res.render("index");
   }
 }

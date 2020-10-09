@@ -7,5 +7,11 @@ html(lang="en")
     +commonHeadContent()
 
   body
+    //- Prepare a window.initialData object for the client.
+    //- See src/shared/models/InitialData.ts for more context.
+    - var encodedInitialData = encodeURIComponent(JSON.stringify(initialData || {}));
+      script(type="text/javascript").
+        initialData = JSON.parse(decodeURIComponent("!{encodedInitialData}"));
+
     #__REACT_APP__
     script(src="/App.js" type="text/javascript" charset="utf-8")
