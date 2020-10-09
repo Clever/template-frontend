@@ -1,66 +1,139 @@
-const path = require("path");
 const autoprefixer = require("autoprefixer");
-const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPugPlugin = require("html-webpack-pug-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
+const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
+const path = require("path");
+const TSConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
+// Run `ANALYZE=1 MODE=production make build` to generate a bundle analysis diagram
+const ANALYZE = Boolean(process.env.ANALYZE);
+const MODE = process.env.MODE || "development";
+const PUBLIC_PATH = "/";
+
+const imageLoaders = [
+  {
+    // Load images as data URLs if smaller than 8192 bytes. Otherwise hash them and fetch them from
+    // PUBLIC_PATH.
+    loader: "url-loader",
+    options: {
+      esModule: false,
+      limit: 8192,
+      name: "images/[name].[contenthash].[ext]",
+    },
+  },
+];
+
+const scriptLoaders = [
+  {
+    loader: "ts-loader",
+    options: {
+      configFile: "tsconfig.client.json",
+    },
+  },
+];
+
+const styleLoaders = [
+  // Extract CSS out of JS assets
+  MiniCssExtractPlugin.loader,
+
+  "css-loader",
+  {
+    loader: "postcss-loader",
+    options: {
+      postcssOptions: {
+        plugins: [
+          // Automatically add vendor prefixes to relevant styles
+          autoprefixer(),
+        ],
+      },
+    },
+  },
+  "less-loader",
+];
+
+const polyfills = ["core-js", "whatwg-fetch"];
+
+function generateHtmlWebpackPluginConfig(entry) {
+  return new HtmlWebpackPlugin({
+    chunks: [entry],
+    filename: `views/${entry}.pug`,
+    template: "src/server/pages/views/index.pug",
+  });
+}
+
+const largeStableLibraries = ["core-js", "lodash", "moment", "react-dom"];
+const largeStableLibrariesRegex = new RegExp(
+  largeStableLibraries.map((library) => `[\\\\/]node_modules[\\\\/]${library}[\\\\/]`).join("|"),
+);
 
 module.exports = {
-  entry: ["core-js", "isomorphic-fetch", "./src/ui/index.tsx"],
-  output: {
-    path: path.resolve(__dirname, "__build"),
-    filename: "App.js"
+  entry: {
+    app: polyfills.concat("./src/ui/index.tsx"),
   },
+  output: {
+    path: path.resolve(__dirname, "build"),
+    publicPath: PUBLIC_PATH,
+    filename: "scripts/[name].[contenthash].js",
+  },
+
+  // Webpack applies a number of standard optimizations (e.g. minification) when mode
+  // is "production"
+  mode: MODE,
+
   module: {
     rules: [
-      {
-        test: /\.(less|css)$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: function() {
-                return [
-                  autoprefixer({
-                    browsers: "> 1% in US, last 3 versions, ie > 9"
-                  })
-                ];
-              }
-            }
-          },
-          "less-loader"
-        ]
-      },
-      {
-        test: /\.(eot|otf|woff|svg|ttf|png|jpg)$/,
-        use: ["url-loader"]
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              configFile: "tsconfig.client.json",
-            },
-          }
-        ]
-      },
-      {
-        test: /\.(json|html)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: { name: "[name].[ext]" }
-          }
-        ]
-      }
-    ]
+      { test: /\.(jpg|png|svg)$/, use: imageLoaders },
+      { test: /\.(ts|tsx)$/, use: scriptLoaders },
+      { test: /\.(css|less)$/, use: styleLoaders },
+    ],
   },
+  optimization: {
+    moduleIds: "hashed",
+    splitChunks: {
+      cacheGroups: {
+        // Create one vendor chunk for known large libraries that don't change often
+        vendor1: {
+          name: "vendor1",
+          priority: 1,
+          test: largeStableLibrariesRegex,
+        },
+        // Create another vendor chunk for everything else
+        vendor2: {
+          name: "vendor2",
+          priority: 0,
+          test: /[\\/]node_modules[\\/]/,
+        },
+      },
+      chunks: "all",
+      maxInitialRequests: 5,
+    },
+  },
+  plugins: [
+    // Extract CSS out of JS assets
+    new MiniCssExtractPlugin({ filename: "styles/[name].[contenthash].css" }),
+
+    // Append hashed asset references to pug templates
+    generateHtmlWebpackPluginConfig("app"),
+    new HtmlWebpackPugPlugin({ adjustIndent: true }),
+
+    // The moment/moment-timezone libraries support a number of languages and timezones, but we
+    // only need support for certain languages and current timezones. These plugins filter out
+    // unused data from these libraries.
+    new MomentLocalesPlugin({
+      localesToKeep: ["en"],
+    }),
+    new MomentTimezoneDataPlugin({
+      endYear: new Date().getFullYear() + 1,
+      startYear: new Date().getFullYear() - 1,
+    }),
+
+    ANALYZE && new BundleAnalyzerPlugin(),
+  ].filter((p) => Boolean(p)),
   resolve: {
-    extensions: [".js", ".ts", ".tsx", ".less"],
-    plugins: [
-      new TsConfigPathsPlugin(),
-    ]
-  }
+    extensions: [".js", ".ts", ".tsx"],
+    plugins: [new TSConfigPathsPlugin({ configFile: "./tsconfig.client.json" })],
+  },
 };

@@ -54,9 +54,9 @@ type-check-server:
 	@./scripts/typeCheckServer.sh
 
 copy-static-assets:
-	@rm -rf ./__build
-	@mkdir ./__build
-	@cp -r ./public/* ./__build
+	@rm -rf ./build
+	@mkdir ./build
+	@cp -r ./public/* ./build
 
 build: copy-static-assets
 	@./node_modules/webpack/bin/webpack.js

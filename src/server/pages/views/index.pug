@@ -5,6 +5,7 @@ doctype html
 html(lang="en")
   head
     +commonHeadContent()
+    //- Webpack will append CSS assets here
 
   body
     //- Prepare a window.initialData object for the client.
@@ -14,4 +15,4 @@ html(lang="en")
         initialData = JSON.parse(decodeURIComponent("!{encodedInitialData}"));
 
     #__REACT_APP__
-    script(src="/App.js" type="text/javascript" charset="utf-8")
+    //- Webpack will append JS assets here
