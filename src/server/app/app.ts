@@ -1,18 +1,18 @@
-import { HttpMethod, patchExpressForPromises } from "clever-frontend-utils";
 import * as bodyParser from "body-parser";
 import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
+import { patchExpressForPromises } from "clever-frontend-utils";
 import * as path from "path";
 import * as kayvee from "kayvee";
 
 import { Clients } from "src/server/lib";
+import { csrfProtectionMiddleware } from "../middleware";
 import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
-import { LandingPageEndpoint } from "src/server/pages";
+import { installPageServingEndpoints } from "src/server/pages";
 import { PORT } from "../config";
-import { csrfProtectionMiddleware } from "../middleware";
 
 export function startServer() {
   // env vars are guaranteed by our deployment system
@@ -53,8 +53,8 @@ export function startServer() {
   installAuthEndpoints(app);
   installApiEndpoints(app);
 
-  // Catch-all route to serve the UI, if no auth or API endpoints above match
-  new LandingPageEndpoint().install(app, HttpMethod.GET, "*");
+  // Page-serving endpoints should be installed last as they include a catch-all route
+  installPageServingEndpoints(app);
 
   app.use(errorHandler);
 

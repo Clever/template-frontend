@@ -8,9 +8,9 @@ import {
   userLoggedInMiddleware,
 } from "src/server/middleware";
 
-// For most repos, you should only need this one landing-page endpoint. Only if you need to serve
-// separate single-page apps for different user types, for example, should you need more than one
-export class LandingPageEndpoint extends Endpoint {
+// For most repos, you should only need this one page-serving endpoint. Only if you need to serve
+// separate single-page apps, e.g. for different user types, should you need more than one.
+export class PageServingEndpoint extends Endpoint {
   constructor() {
     super();
     this.addMiddleware(endpointTypeMiddleware(EndpointType.PAGE_SERVING));
