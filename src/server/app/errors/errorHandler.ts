@@ -1,5 +1,4 @@
 import * as express from "express";
-import * as path from "path";
 
 import { AuthorizationError, NotFoundError, PermissionError, ValidationError } from "./errors";
 import { EndpointType } from "src/server/middleware";
@@ -11,10 +10,7 @@ import { EndpointType } from "src/server/middleware";
 function serveErrorPage(res: express.Response, statusCode: number, message: string) {
   res.status(statusCode);
   res.locals.message = message;
-
-  // TODO: Replace this static file with a template that can have server-injected content
-  // res.render("error.pug");
-  res.sendFile(path.resolve(__dirname, "..", "..", "pages", "views", "error.html"));
+  res.render("error");
 }
 
 // Express identifies error-handling middleware by number of params (four instead of the typical
