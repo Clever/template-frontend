@@ -7,19 +7,16 @@ import * as path from "path";
 import * as kayvee from "kayvee";
 
 import { Clients } from "src/server/lib";
+import * as config from "src/server/config";
 import { csrfProtectionMiddleware } from "../middleware";
 import { errorHandler } from "./errors/errorHandler";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { installPageServingEndpoints } from "src/server/pages";
-import { PORT } from "../config";
 
 export function startServer() {
-  // env vars are guaranteed by our deployment system
-  const isLocal = process.env._IS_LOCAL === "true";
-  const logger = new kayvee.logger(process.env._APP_NAME);
+  const logger = new kayvee.logger(config.APP_NAME);
   kayvee.setGlobalRouting(path.join(__dirname, "..", "..", "..", "kvconfig.yml"));
-
   const app = express();
   patchExpressForPromises(app);
 
@@ -60,12 +57,12 @@ export function startServer() {
   app.use(errorHandler);
 
   // Start the server
-  const server = app.listen(Number(PORT), isLocal ? "localhost" : "0.0.0.0", () => {
-    console.log(`Listening on port ${PORT}...`);
+  const server = app.listen(config.PORT, config.IS_LOCAL ? "localhost" : "0.0.0.0", () => {
+    console.log(`Listening on port ${config.PORT}...`);
 
     // Our SIGTERM handler breaks server code watch functionality, so let's skip setting it up
     // when running locally
-    if (isLocal) {
+    if (config.IS_LOCAL) {
       return;
     }
 
