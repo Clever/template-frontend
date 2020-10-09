@@ -11,7 +11,10 @@ const TSConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 // Run `ANALYZE=1 MODE=production make build` to generate a bundle analysis diagram
 const ANALYZE = Boolean(process.env.ANALYZE);
 const MODE = process.env.MODE || "development";
-const PUBLIC_PATH = "/";
+// TODO: If you'd like to serve assets via the CDN, uncomment the relevant lines in the
+// .circleci/config.yml
+const PUBLIC_PATH =
+  process.env.CDN_ASSETS === "true" ? "https://assets.clever.com/{{.AppName}}/build/" : "/";
 
 const imageLoaders = [
   {

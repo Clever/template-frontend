@@ -14,8 +14,8 @@ commands:
     description: Clone the ci-scripts repo
     steps:
     - run:
-        command: cd .. && git clone --depth 1 -v https://github.com/Clever/ci-scripts.git && cd ci-scripts && git show --oneline -s
         name: Clone ci-scripts
+        command: cd .. && git clone --depth 1 -v https://github.com/Clever/ci-scripts.git && cd ci-scripts && git show --oneline -s
 
 jobs:
   build:
@@ -23,7 +23,13 @@ jobs:
     steps:
     - checkout
     - run: npm install
-    - run: NODE_ENV=production make build
+    - run:
+        name: Build assets
+        command: MODE=production make build
+        # TODO: Use the following command instead if you'd like to serve assets via the CDN
+        # command: |
+        #   if [ "${CIRCLE_BRANCH}" != "master" ]; then MODE=production make build; fi;
+        #   if [ "${CIRCLE_BRANCH}" == "master" ]; then MODE=production CDN_ASSETS=true make build; fi;
     - persist_to_workspace:
         root: ~/Clever
         paths: "."
@@ -37,6 +43,15 @@ jobs:
     - setup_remote_docker
     - run: ../ci-scripts/circleci/docker-publish $DOCKER_USER $DOCKER_PASS "$DOCKER_EMAIL" $DOCKER_ORG
     - run: ../ci-scripts/circleci/catapult-publish $CATAPULT_URL $CATAPULT_USER $CATAPULT_PASS {{.AppName}}
+    # TODO: Uncomment this if you'd like to serve assets via the CDN
+    # - run:
+    #     # Upload assets to S3, gzipping those that should be gzipped
+    #     name: Upload assets to S3
+    #     command: |
+    #       if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/s3-upload build/favicon.ico s3://assets.clever.com/{{.AppName}}/build/favicon.ico; fi;
+    #       if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/s3-upload build/images/ s3://assets.clever.com/{{.AppName}}/build/images/; fi;
+    #       if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/s3-upload --content-encoding gzip build/scripts/ s3://assets.clever.com/{{.AppName}}/build/scripts/; fi;
+    #       if [ "${CIRCLE_BRANCH}" == "master" ]; then $HOME/ci-scripts/circleci/s3-upload --content-encoding gzip build/styles/ s3://assets.clever.com/{{.AppName}}/build/styles/; fi;
 
   unit-test:
     executor: common-executor
@@ -44,8 +59,8 @@ jobs:
     - attach_workspace:
         at: ~/Clever
     - run:
-        command: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
         name: Set up CircleCI artifacts directories
+        command: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: make lint
     - run: make test
     - run: make type-check-server
