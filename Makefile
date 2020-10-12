@@ -12,10 +12,12 @@ MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILE
 
 ESLINT := ./node_modules/.bin/eslint
 JEST := ./node_modules/.bin/jest
+NODEMON := ./node_modules/.bin/nodemon
 PRETTIER := ./node_modules/.bin/prettier
 STYLELINT := ./node_modules/.bin/stylelint
+WEBPACK := ./node_modules/.bin/webpack
 
-.PHONY: format format-all format-check lint-es lint-fix lint test type-check-server copy-static-assets build run
+.PHONY: format format-all format-check lint-es lint-fix lint-style lint test-jest type-check-server test clean copy-static-assets build run
 
 format:
 	@echo "Formatting modified files..."
@@ -45,21 +47,26 @@ lint-style:
 
 lint: format-check lint-es lint-style
 
-test:
-	@$(JEST) --passWithNoTests --maxWorkers=1
+test-jest:
+	@echo "Running jest..."
+	@IS_TEST=1 $(JEST) --passWithNoTests --maxWorkers=1
 
 # Note that we don't need a separate command for type checking the client. Webpack handles that
 type-check-server:
 	@echo "Type checking server..."
 	@./scripts/typeCheckServer.sh
 
-copy-static-assets:
-	@rm -rf ./build
-	@mkdir ./build
-	@cp -r ./public/* ./build
+test: test-jest type-check-server
 
-build: copy-static-assets
-	@./node_modules/webpack/bin/webpack.js
+clean:
+	@rm -rf ./build/
 
-run: copy-static-assets
-	@node_modules/webpack/bin/webpack.js --watch & ./node_modules/.bin/nodemon --watch src/server --watch src/shared -e ts --exec 'NODE_ENV=development PORT=5020 HOST=localhost ./node_modules/.bin/ts-node --require tsconfig-paths/register ./src/server/index.ts'
+copy-static-assets: clean
+	@mkdir ./build/
+	@cp -r ./public/* ./build/
+
+build: clean copy-static-assets
+	@$(WEBPACK)
+
+run: clean copy-static-assets
+	@$(WEBPACK) --watch & $(NODEMON) --watch ./src/server/ --watch ./src/shared/ -e ts --exec 'NODE_ENV=development ./scripts/startServer.sh'
