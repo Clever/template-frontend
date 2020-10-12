@@ -17,7 +17,7 @@ PRETTIER := ./node_modules/.bin/prettier
 STYLELINT := ./node_modules/.bin/stylelint
 WEBPACK := ./node_modules/.bin/webpack
 
-.PHONY: format format-all format-check lint-es lint-fix lint-style lint test-jest type-check-server test copy-static-assets build run
+.PHONY: format format-all format-check lint-es lint-fix lint-style lint test-jest type-check-server test clean copy-static-assets build run
 
 format:
 	@echo "Formatting modified files..."
@@ -58,13 +58,15 @@ type-check-server:
 
 test: test-jest type-check-server
 
-copy-static-assets:
-	@rm -rf ./build
-	@mkdir ./build
-	@cp -r ./public/* ./build
+clean:
+	@rm -rf ./build/
 
-build: copy-static-assets
+copy-static-assets: clean
+	@mkdir ./build/
+	@cp -r ./public/* ./build/
+
+build: clean copy-static-assets
 	@$(WEBPACK)
 
-run: copy-static-assets
+run: clean copy-static-assets
 	@$(WEBPACK) --watch & $(NODEMON) --watch ./src/server/ --watch ./src/shared/ -e ts --exec 'NODE_ENV=development ./scripts/startServer.sh'
