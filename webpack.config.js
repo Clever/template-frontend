@@ -74,7 +74,7 @@ const largeStableLibrariesRegex = new RegExp(
 
 module.exports = {
   entry: {
-    app: polyfills.concat("./src/ui/index.tsx"),
+    app: polyfills.concat("./src/ui/app/App/index.tsx"),
   },
   output: {
     path: path.resolve(__dirname, "build"),
