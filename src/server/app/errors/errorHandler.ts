@@ -1,7 +1,10 @@
 import * as express from "express";
+import * as kayvee from "kayvee";
 
 import { AuthorizationError, NotFoundError, PermissionError, ValidationError } from "./errors";
+import * as config from "src/server/config";
 import { EndpointType } from "src/server/middleware";
+import { extractFieldsFromRequest } from "src/server/lib/logging";
 
 // We disable the @clever/no-send-status-error in the ErrorHandler since this is where we translate
 // the thrown errors to status codes.
@@ -12,6 +15,10 @@ function serveErrorPage(res: express.Response, statusCode: number, message: stri
   res.locals.message = message;
   res.render("error");
 }
+
+// Use a one-off logger rather than req.log since we may encounter errors in code that runs before
+// the middleware that populates req.log
+const logger = new kayvee.Logger(config.APP_NAME);
 
 // Express identifies error-handling middleware by number of params (four instead of the typical
 // three)
@@ -48,13 +55,16 @@ export const errorHandler = (
       serveErrorPage(res, 422, err.message);
     }
   } else {
-    // This block handles both `InternalError`s and basic `Error`s. For both of these errors, we
-    // intentionally don't send error details to the client.
+    // For 5xxs, we intentionally don't send error details to the client
     if (endpointServesJson) {
       res.sendStatus(500);
     } else {
       serveErrorPage(res, 500, "");
     }
-    // TODO: Log this error to an error reporting service
+    logger.errorD("unknown-error", {
+      ...extractFieldsFromRequest(req),
+      message: err.message,
+    });
+    // TODO: Log this error to an error reporting service, e.g. Sentry
   }
 };
