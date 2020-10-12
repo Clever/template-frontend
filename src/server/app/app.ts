@@ -6,42 +6,85 @@ import { patchExpressForPromises } from "clever-frontend-utils";
 import * as path from "path";
 import * as kayvee from "kayvee";
 
+import { bodyParserErrorHandler } from "src/server/middleware/bodyParserErrorHandler";
 import { Clients } from "src/server/lib";
 import * as config from "src/server/config";
-import { csrfProtectionMiddleware } from "../middleware";
+import { csrfProtectionMiddleware } from "src/server/middleware";
 import { errorHandler } from "./errors/errorHandler";
+import { extractFieldsFromRequest } from "src/server/lib/logging";
 import { installApiEndpoints } from "src/server/api";
 import { installAuthEndpoints } from "src/server/auth";
 import { installPageServingEndpoints } from "src/server/pages";
+import { NotFoundError } from "./errors";
 
 export function startServer() {
   const logger = new kayvee.logger(config.APP_NAME);
-  kayvee.setGlobalRouting(path.join(__dirname, "..", "..", "..", "kvconfig.yml"));
+
   const app = express();
   patchExpressForPromises(app);
 
+  app.set("trust proxy", true);
+  app.set("view engine", "pug");
   const viewsDir = path.join(__dirname, "..", "..", "..", "src/server/pages/views");
   const builtViewsDir = path.join(__dirname, "..", "..", "..", "build/views");
-  app.set("view engine", "pug");
   app.set("views", [viewsDir, builtViewsDir]);
   app.locals.basedir = viewsDir;
 
-  app.use(cookieParser());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParserErrorHandler(bodyParser.json()));
+  app.use(bodyParserErrorHandler(bodyParser.urlencoded({ extended: true })));
   app.use(compression());
+  app.use(cookieParser());
   app.use(express.static(path.join(__dirname, "..", "..", "..", "build")));
 
+  // Short-circuit if health check
+  app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (req.url === "/_healthcheck") {
+      res.sendStatus(200);
+      return;
+    }
+    next();
+  });
+
+  // Auto-redirect from http to https (unless running locally)
+  app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (req.secure || config.IS_LOCAL) {
+      next();
+      return;
+    }
+    res.redirect(`https://${req.hostname}${req.url}`);
+  });
+
+  // Return 404s rather than 500s for malformed paths
+  app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+      decodeURIComponent(req.path);
+    } catch (err) {
+      throw new NotFoundError();
+    }
+    next();
+  });
+
   // Etags aren't properly handled by all browsers so we outright disable all caching on
-  // our API methods.
+  // our API methods
   app.use((req, res, next) => {
     res.header("Cache-Control", "no-cache");
     next();
   });
 
-  app.get("/_healthcheck", (req, res) => {
-    res.sendStatus(200);
-  });
+  // Set up request-finished logs and `req.log` logger. Auto-populate as many fields as possible
+  // from the request object
+  const requestFinishedLoggerOptions = {
+    handlers: [extractFieldsFromRequest],
+    source: config.APP_NAME,
+  };
+  const contextLoggerOptions = {
+    enabled: true,
+    handlers: [extractFieldsFromRequest],
+  };
+  app.use(kayvee.middleware(requestFinishedLoggerOptions, contextLoggerOptions));
+
+  // Set up log routing
+  kayvee.setGlobalRouting(path.join(__dirname, "..", "..", "..", "kvconfig.yml"));
 
   Clients.initialize();
 
@@ -67,9 +110,9 @@ export function startServer() {
     }
 
     process.on("SIGTERM", () => {
-      logger.info("sigterm-received");
+      logger.infoD("sigterm-received", {});
       server.close(() => {
-        logger.info("exiting");
+        logger.infoD("exiting", {});
         process.exit(0);
       });
     });

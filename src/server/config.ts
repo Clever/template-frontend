@@ -25,7 +25,7 @@ function discoveryWrapper(service: string, expose: string, method: string) {
   }
 }
 
-export const APP_NAME = process.env._APP_NAME; // Provided by deployment system
+export const APP_NAME = process.env._APP_NAME || "{{.AppName}}"; // Provided by deployment system
 export const HOST = process.env.HOST || "localhost";
 export const PORT = Number(process.env.PORT) || 5020;
 
