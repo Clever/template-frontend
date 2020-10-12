@@ -1,0 +1,12 @@
+@import (reference) "~clever-components/dist/less/index";
+
+.Home--buttons {
+  // No need to use the Dewey flex mixins here as this repo has an autoprefixer configured
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Home--buttons > button {
+  .margin--bottom--s();
+  .margin--right--s();
+}
