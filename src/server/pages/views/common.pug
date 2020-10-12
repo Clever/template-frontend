@@ -1,4 +1,7 @@
 mixin commonHeadContent
   title Clever | {{.AppName}}
   link(rel="shortcut icon" href="/favicon.ico?1")
+  //- Only include the origin and not query params in referrer headers to avoid exposing sensitive
+  //- query params to third parties
+  meta(name="referrer" content="origin")
   meta(name="viewport" content="width=device-width, initial-scale=1")
