@@ -36,13 +36,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
-  plugins: [
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "@clever",
-  ],
+  plugins: ["jsx-a11y", "react", "react-hooks", "@typescript-eslint", "@clever"],
   rules: {
     "max-len": [
       "error",

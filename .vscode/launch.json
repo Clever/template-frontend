@@ -11,9 +11,7 @@
       "request": "launch",
       "name": "Launch Server",
       "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
-      "args": [
-        "${workspaceRoot}/src/backend/index.ts"
-      ],
+      "args": ["${workspaceRoot}/src/backend/index.ts"],
       "protocol": "inspector"
     },
     // config based on this suggestion:
@@ -24,16 +22,11 @@
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/.bin/jest",
       "stopOnEntry": false,
-      "args": [
-        "--runInBand",
-        "--no-cache"
-      ],
+      "args": ["--runInBand", "--no-cache"],
       "cwd": "${workspaceRoot}",
       "preLaunchTask": null,
       "runtimeExecutable": null,
-      "runtimeArgs": [
-        "--nolazy"
-      ]
+      "runtimeArgs": ["--nolazy"]
     }
   ]
 }
