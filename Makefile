@@ -11,12 +11,14 @@ JSON_FILES := $(shell find src/ -name "*.json")
 CONFIG_FILES := $(shell find . .circleci/ .vscode/ jest/ launch/ -maxdepth 1 -name "*.js" -o -name "*.json" -o -name "*.yml")
 FORMATTED_FILES := $(TS_FILES) $(LESS_FILES) # Add other file types as you see fit, e.g. JSON files, config files
 MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILES))
+SVGS := $(shell find src/ -name "*.svg")
 
 ESLINT := ./node_modules/.bin/eslint
 JEST := ./node_modules/.bin/jest
 NODEMON := ./node_modules/.bin/nodemon
 PRETTIER := ./node_modules/.bin/prettier
 STYLELINT := ./node_modules/.bin/stylelint
+SVGO := ./node_modules/.bin/svgo
 WEBPACK := ./node_modules/.bin/webpack
 
 .PHONY: format format-all format-check lint-es lint-fix lint-style lint test-jest type-check-server test clean copy-static-assets build run
@@ -33,6 +35,11 @@ format-check:
 	@echo "Running format check..."
 	@$(PRETTIER) --list-different $(FORMATTED_FILES) || \
 		(echo -e "❌ \033[0;31mPrettier found discrepancies in the above files. Run 'make format' to fix.\033[0m" && false)
+
+# For optimizing SVGs
+svgo:
+	@echo "Running svgo..."
+	@$(SVGO) --pretty --indent=0 $(SVGS)
 
 lint-es:
 	@echo "Running eslint..."
