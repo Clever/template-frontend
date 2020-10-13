@@ -22,6 +22,11 @@ jobs:
     executor: common-executor
     steps:
       - checkout
+      - run:
+          name: Set up .npmrc
+          command: |
+            sed -i.bak s/\${npm_auth_token}/$NPM_TOKEN/ .npmrc_docker
+            mv .npmrc_docker .npmrc
       - run: npm install
       - run:
           name: Build assets
