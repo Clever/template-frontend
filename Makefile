@@ -5,8 +5,8 @@ SHELL := /bin/bash
 
 $(eval $(call node-version-check,$(NODE_VERSION)))
 
-TS_FILES := $(shell find src -name "*.ts" -o -name "*.tsx")
-LESS_FILES := $(shell find src -name "*.less")
+TS_FILES := $(shell find src/ types/ -name "*.ts" -o -name "*.tsx")
+LESS_FILES := $(shell find src/ -name "*.less")
 FORMATTED_FILES := $(TS_FILES) $(LESS_FILES) # Add other file types as you see fit, e.g. JSON files, config files
 MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILES))
 
