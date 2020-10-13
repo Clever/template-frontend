@@ -6,6 +6,6 @@ import { AuthenticationError } from "src/server/app/errors";
 export async function authCheck(req: express.Request) {
   const authenticated = true;
   if (!authenticated) {
-    throw new AuthenticationError("User not logged in");
+    throw new AuthenticationError("User not logged in", "NoSession");
   }
 }

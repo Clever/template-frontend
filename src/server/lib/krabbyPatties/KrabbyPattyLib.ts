@@ -9,7 +9,7 @@ interface KrabbyPattyOptions {
 export class KrabbyPattyLib {
   async makeKrabbyPatty(options: KrabbyPattyOptions) {
     if (!options.sauces || !options.sauces.includes(Sauce.SECRET_FORMULA)) {
-      throw new ValidationError("Can't forget the secret formula!", 1);
+      throw new ValidationError("Can't forget the secret formula!", "MissingSecretFormula");
     }
 
     // spongebob-service doesn't actually exist so I'm mocking out a response from it
