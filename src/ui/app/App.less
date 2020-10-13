@@ -1,0 +1,71 @@
+@import (reference) "~clever-components/dist/less/index";
+
+html,
+body {
+  .font--ProximaNova();
+  .text--medium;
+  color: @neutral_dark_gray;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* stylelint-disable selector-max-id */
+#__APP__ {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+  position: fixed;
+  width: 100%;
+}
+/* stylelint-enable selector-max-id */
+
+h1 {
+  .margin--bottom--2xl();
+  .text--huge();
+  .text--semi-bold();
+}
+
+h2 {
+  .margin--bottom--s();
+  .text--large();
+  .text--semi-bold();
+}
+
+p {
+  .text--line-height-4();
+}
+
+p:not(:last-child) {
+  .margin--bottom--xs();
+}
+
+b {
+  .text--semi-bold();
+}
+
+.App--contents {
+  display: flex;
+  height: 100%;
+  overflow: auto;
+}
+
+// For convenience. Apply the mobileAndTabletOnly class name to elements that you want to appear
+// on mobile and tablet but not desktop.
+@media only screen and (min-width: @breakpointM) {
+  .mobileAndTabletOnly {
+    display: none !important;
+  }
+}
+
+// For convenience. Apply the desktopOnly class name to elements that you want to appear
+// on desktop but not mobile or tablet.
+@media only screen and (max-width: @breakpointM) {
+  .desktopOnly {
+    display: none !important;
+  }
+}
