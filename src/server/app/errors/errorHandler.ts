@@ -1,9 +1,8 @@
 import * as express from "express";
 import * as kayvee from "kayvee";
 
-import { AuthorizationError, NotFoundError, PermissionError, ValidationError } from "./errors";
+import { AuthenticationError, NotFoundError, PermissionError, ValidationError } from "./errors";
 import * as config from "src/server/config";
-import { EndpointType } from "src/server/middleware";
 import { extractFieldsFromRequest } from "src/server/lib/logging";
 
 // We disable the @clever/no-send-status-error in the ErrorHandler since this is where we translate
@@ -28,9 +27,9 @@ export const errorHandler = (
   res: express.Response,
   next: express.NextFunction,
 ) => {
-  const endpointServesJson = req.endpointType === EndpointType.API;
+  const endpointServesJson = req.endpointType === "api";
 
-  if (err instanceof AuthorizationError) {
+  if (err instanceof AuthenticationError) {
     if (endpointServesJson) {
       res.status(401).json({ error: err.message, code: err.code });
     } else {

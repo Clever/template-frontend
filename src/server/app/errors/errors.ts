@@ -1,3 +1,5 @@
+import { ErrorCode } from "src/shared/constants";
+
 /**
  * Constructors of errors must explicitly set prototype as per
  * https://github.com/Microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md
@@ -6,13 +8,13 @@
  */
 
 // 401 Unauthorized
-export class AuthorizationError extends Error {
+export class AuthenticationError extends Error {
   message: string;
-  code: number;
+  code: ErrorCode;
 
-  constructor(message = "Unauthorized", code = 0) {
+  constructor(message = "Unauthorized", code: ErrorCode = "Unknown") {
     super(message);
-    Object.setPrototypeOf(this, AuthorizationError.prototype);
+    Object.setPrototypeOf(this, AuthenticationError.prototype);
     this.message = message;
     this.code = code;
   }
@@ -21,9 +23,9 @@ export class AuthorizationError extends Error {
 // 403 Forbidden
 export class PermissionError extends Error {
   message: string;
-  code: number;
+  code: ErrorCode;
 
-  constructor(message = "Forbidden", code = 0) {
+  constructor(message = "Forbidden", code: ErrorCode  = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, PermissionError.prototype);
     this.message = message;
@@ -34,9 +36,9 @@ export class PermissionError extends Error {
 // 404 Not Found
 export class NotFoundError extends Error {
   message: string;
-  code: number;
+  code: ErrorCode;
 
-  constructor(message = "Not Found", code = 0) {
+  constructor(message = "Not Found", code: ErrorCode  = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, NotFoundError.prototype);
     this.message = message;
@@ -47,26 +49,12 @@ export class NotFoundError extends Error {
 // 422 Unprocessable Entity
 export class ValidationError extends Error {
   message: string;
-  code: number;
+  code: ErrorCode;
 
-  constructor(message = "Unprocessable Entity", code = 0) {
+  constructor(message = "Unprocessable Entity", code: ErrorCode  = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, ValidationError.prototype);
     this.message = message;
     this.code = code;
-  }
-}
-
-// 500 Internal Server Error
-export class InternalError extends Error {
-  message: string;
-  code: number;
-
-  constructor(message = "Internal Server Error", code = 0) {
-    super(message);
-    Object.setPrototypeOf(this, InternalError.prototype);
-    this.message = message;
-    this.code = code;
-    Error.captureStackTrace(this);
   }
 }

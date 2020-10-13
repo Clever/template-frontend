@@ -1,10 +1,12 @@
 import { Endpoint } from "clever-frontend-utils";
 
-import { EndpointType, endpointTypeMiddleware } from "src/server/middleware";
+import { endpointTypeMiddleware } from "src/server/middleware";
 
+// Create extensions of this class for auth functionality, e.g.
+// class LogoutEndpoint extends AuthEndpoint {}
 export class AuthEndpoint extends Endpoint {
   constructor() {
     super();
-    this.addMiddleware(endpointTypeMiddleware(EndpointType.AUTH));
+    this.addMiddleware(endpointTypeMiddleware("auth"));
   }
 }
