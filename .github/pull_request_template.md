@@ -1,14 +1,17 @@
-## Link to JIRA
-[Link to JIRA](url)
+# Jira
 
-## Overview
-[insert description]
+[TICKET-123](https://clever.atlassian.net/browse/TICKET-123)
 
-## Testing
+# Overview
 
-## Rollout
+# Testing
 
-## New Repo Setup
-- [ ] Set up Slack notifications for this app for your team https://clever.atlassian.net/wiki/spaces/ENG/pages/888897571/GitHub+assignments
-- [ ] Tune your alarms if you'd like anything other than our default recommendations https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices
+# Rollout
+
+# New repo setup
+
+- [ ] Populate the `HOST` and `PORT` env vars in [ark-config](https://github.com/Clever/ark-config)
+- [ ] Set up Slack notifications for this app for your team if you'd like ([GitHub assignments and notifications](https://clever.atlassian.net/wiki/spaces/ENG/pages/888897571/GitHub+assignments))
+- [ ] Tune your alarms if you'd like anything other than our default recommendations ([alarm best practices](https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices))
+- [ ] Step through the repo's TODOs and prioritize them as you see fit. You can ignore TODOs suffixed with `(template-frontend)` as those are intended for the maintainers of the template, not you as a consumer of the template.
 - [ ] Delete this section from the PR template
