@@ -6,13 +6,13 @@
  */
 
 // 401 Unauthorized
-export class AuthorizationError extends Error {
+export class AuthenticationError extends Error {
   message: string;
   code: number;
 
   constructor(message = "Unauthorized", code = 0) {
     super(message);
-    Object.setPrototypeOf(this, AuthorizationError.prototype);
+    Object.setPrototypeOf(this, AuthenticationError.prototype);
     this.message = message;
     this.code = code;
   }
