@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // Extend the Express request type definition to include fields added by us
 
 import express = require("express");
