@@ -9,7 +9,7 @@ Owned by {{.TeamName}}
 ```
 cd {{.AppName}}
 npm install
-ark start family-portal -e clever-dev -l
+ark start {{.AppName}} -e clever-dev -l
 ```
 
 If you're in the `{{.AppName}}` directory, and you've set your default ark env to `clever-dev`, the ark command simplifies down to:
