@@ -1,4 +1,11 @@
 mixin commonHeadContent
   title Clever | {{.AppName}}
   link(rel="shortcut icon" href="/favicon.ico?1")
+  //- Only include the origin and not query params in referrer headers to avoid exposing sensitive
+  //- query params to third parties.
+  //- Note: We'd ideally use content="strict-origin-when-cross-origin", but iOS Safari doesn't yet
+  //- support this value.
+  //- TODO: Switch to this value once support is wider.
+  //- Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+  meta(name="referrer" content="origin")
   meta(name="viewport" content="width=device-width, initial-scale=1")

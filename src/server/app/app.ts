@@ -2,6 +2,7 @@ import * as bodyParser from "body-parser";
 import * as compression from "compression";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
+import * as helmet from "helmet";
 import { patchExpressForPromises } from "clever-frontend-utils";
 import * as path from "path";
 import * as kayvee from "kayvee";
@@ -35,6 +36,7 @@ export function startServer() {
   app.use(compression());
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, "..", "..", "..", "build")));
+  app.use(helmet());
 
   // Short-circuit if health check
   app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
