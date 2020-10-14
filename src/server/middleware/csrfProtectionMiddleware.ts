@@ -17,8 +17,8 @@ const logger = new kayvee.Logger(config.APP_NAME);
  * Defining it as middleware that's applied before every request ensures
  * the check fires off before we route anywhere in the application.
  *
- * TODO: Add this middleware to an external library, and refactor existing frontend
- * applications to use the library middleware instead of a copy of the middleware.
+ * TODO(template-frontend): Add this middleware to an external library and refactor existing
+ * frontend applications to use the library middleware instead of a copy of the middleware.
  */
 export const csrfProtectionMiddleware = (
   req: express.Request,
