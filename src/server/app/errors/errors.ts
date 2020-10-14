@@ -25,7 +25,7 @@ export class PermissionError extends Error {
   message: string;
   code: ErrorCode;
 
-  constructor(message = "Forbidden", code: ErrorCode  = "Unknown") {
+  constructor(message = "Forbidden", code: ErrorCode = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, PermissionError.prototype);
     this.message = message;
@@ -38,7 +38,7 @@ export class NotFoundError extends Error {
   message: string;
   code: ErrorCode;
 
-  constructor(message = "Not Found", code: ErrorCode  = "Unknown") {
+  constructor(message = "Not Found", code: ErrorCode = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, NotFoundError.prototype);
     this.message = message;
@@ -51,7 +51,7 @@ export class ValidationError extends Error {
   message: string;
   code: ErrorCode;
 
-  constructor(message = "Unprocessable Entity", code: ErrorCode  = "Unknown") {
+  constructor(message = "Unprocessable Entity", code: ErrorCode = "Unknown") {
     super(message);
     Object.setPrototypeOf(this, ValidationError.prototype);
     this.message = message;

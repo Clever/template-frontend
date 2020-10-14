@@ -8,7 +8,7 @@ $(eval $(call node-version-check,$(NODE_VERSION)))
 TS_FILES := $(shell find src/ types/ -name "*.ts" -o -name "*.tsx")
 LESS_FILES := $(shell find src/ -name "*.less")
 JSON_FILES := $(shell find src/ -name "*.json")
-CONFIG_FILES := $(shell find . .circleci/ .vscode/ jest/ launch/ -maxdepth 1 -name "*.js" -o -name "*.json" -o -name "*.yml")
+CONFIG_FILES := $(shell find . .circleci/ jest/ launch/ -maxdepth 1 -name "*.js" -o -name "*.json" -o -name "*.yml")
 FORMATTED_FILES := $(TS_FILES) $(LESS_FILES) # Add other file types as you see fit, e.g. JSON files, config files
 MODIFIED_FORMATTED_FILES := $(shell git diff --name-only master $(FORMATTED_FILES))
 SVGS := $(shell find src/ -name "*.svg")
