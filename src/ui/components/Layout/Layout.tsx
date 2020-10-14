@@ -12,11 +12,11 @@ interface Props {
   children: React.ReactNode;
   className?: string;
   contentClassName?: string;
-  windowTitle?: string;
+  windowTitle: string;
 }
 
 export function Layout(props: Props) {
-  const { children, className, contentClassName, windowTitle = "{{.AppName}}" } = props;
+  const { children, className, contentClassName, windowTitle } = props;
 
   React.useEffect(() => {
     document.title = `Clever | ${windowTitle}`;
