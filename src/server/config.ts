@@ -28,6 +28,11 @@ function discoveryWrapper(service: string, expose: string, method: string) {
 export const APP_NAME = process.env._APP_NAME || "{{.AppName}}"; // Provided by deployment system
 export const HOST = process.env.HOST || "localhost";
 export const PORT = Number(process.env.PORT) || 5020;
+export const FAVICON_PATH = "/favicon.ico?1";
+// TODO: Use this instead if serving assets via the CDN
+// export const FAVICON_PATH = IS_LOCAL
+//   ? "/favicon.ico?1"
+//   : "https://assets.clever.com/{{.AppName}}/build/favicon.ico?1";
 
 export const APP_URL = url.format({
   protocol: IS_LOCAL ? "http" : "https",

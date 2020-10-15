@@ -1,6 +1,7 @@
 import { Endpoint } from "clever-frontend-utils";
 import * as express from "express";
 
+import * as config from "src/server/config";
 import { constructInitialData } from "src/server/lib/initialData";
 import { endpointTypeMiddleware, pageServingAuthCheckMiddleware } from "src/server/middleware";
 
@@ -14,6 +15,7 @@ export class PageServingEndpoint extends Endpoint {
   }
 
   async handler(req: express.Request, res: express.Response) {
+    res.locals.faviconPath = config.FAVICON_PATH;
     res.locals.initialData = await constructInitialData(req, res);
     res.render("app");
   }
