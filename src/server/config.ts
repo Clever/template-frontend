@@ -14,7 +14,7 @@ export const IS_TEST = Boolean(process.env.IS_TEST);
 // In test environments, calls to discovery can fail due to undefined env vars. We swallow errors
 // in those cases.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function discoveryWrapper(service: string, expose: string, method: string) {
+function discoveryWrapper(service: string, expose: string, method: discovery.Method) {
   try {
     return discovery(service, expose)[method]();
   } catch (err) {
