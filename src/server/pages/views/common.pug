@@ -1,6 +1,6 @@
 mixin commonHeadContent
   title Clever
-  link(rel="shortcut icon" href="/favicon.ico?1")
+  link(rel="shortcut icon" href=faviconPath)
   //- Only include the origin and not query params in referrer headers to avoid exposing sensitive
   //- query params to third parties.
   //- Note: We'd ideally use content="strict-origin-when-cross-origin", but iOS Safari doesn't yet
