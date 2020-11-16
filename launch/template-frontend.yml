@@ -53,3 +53,14 @@ alarms:
     severity: minor
     parameters:
       threshold: 0.05
+pod_config:
+  dev:
+    podSelector:
+      production: false
+      function: default
+      region: us-west-1
+  prod:
+    podSelector:
+      production: true
+      function: default
+      region: us-west-1
