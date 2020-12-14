@@ -3,7 +3,7 @@ env:
   - PORT
 resources:
   cpu: 0.5
-  max_mem: 0.5
+  max_mem: 1
 shepherds:
   - "{{.CreatorEmail}}"
 expose:
@@ -53,3 +53,5 @@ alarms:
     severity: minor
     parameters:
       threshold: 0.05
+pod_config:
+  group: us-west-1
