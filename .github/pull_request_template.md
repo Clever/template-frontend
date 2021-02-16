@@ -8,6 +8,10 @@
 
 # Rollout
 
+## Rollback (in the event of a problem)
+- [ ] Rollback via dapple OR `ark rollback -e production {{.AppName}}`?
+- [ ] Anything else?
+
 # New repo setup
 
 - [ ] Populate the `HOST` and `PORT` env vars in [ark-config](https://github.com/Clever/ark-config)
