@@ -34,7 +34,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "ts-node": "^9.0.0",
-    "ua-parser-js": "^0.7.22",
+    "ua-parser-js": "0.7.28",
     "whatwg-fetch": "^3.4.1"
   },
   "devDependencies": {
@@ -76,5 +76,8 @@
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^4.0.0"
+  },
+  "resolutions": {
+    "ua-parser-js": "0.7.28"
   }
 }
