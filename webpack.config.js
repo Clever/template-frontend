@@ -8,6 +8,10 @@ const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
 const path = require("path");
 const TSConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
+// required for react hot reloading
+const ReactRefreshTypeScript = require("react-refresh-typescript");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+
 // Run `ANALYZE=1 MODE=production make build` to generate a bundle analysis diagram
 const ANALYZE = Boolean(process.env.ANALYZE);
 const MODE = process.env.MODE || "development";
@@ -34,6 +38,12 @@ const scriptLoaders = [
     loader: "ts-loader",
     options: {
       configFile: "tsconfig.client.json",
+      getCustomTransformers:
+        MODE === "development"
+          ? () => ({
+              before: [ReactRefreshTypeScript()].filter(Boolean),
+            })
+          : null,
     },
   },
 ];
@@ -79,12 +89,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: PUBLIC_PATH,
-    filename: "scripts/[name].[contenthash].js",
+    filename:
+      MODE === "development" ? "scripts/[name].[hash].js" : "scripts/[name].[contenthash].js",
   },
 
   // Webpack applies a number of standard optimizations (e.g. minification) when mode
   // is "production"
   mode: MODE,
+  devtool: MODE == "development" && "cheap-module-source-map",
 
   module: {
     rules: [
@@ -134,9 +146,38 @@ module.exports = {
     }),
 
     ANALYZE && new BundleAnalyzerPlugin(),
+    MODE === "development" && new ReactRefreshWebpackPlugin(),
   ].filter((p) => Boolean(p)),
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
     plugins: [new TSConfigPathsPlugin({ configFile: "./tsconfig.client.json" })],
+  },
+  // see how this works https://webpack.js.org/configuration/dev-server/
+  devServer: {
+    hot: true,
+    // we can optionally serve static files from a separate path, but
+    // the proxy will take care of this since the backend serves public files already
+    static: false,
+    // see how this works https://github.com/webpack/webpack-dev-middleware#options
+    devMiddleware: {
+      index: false,
+      // webpack dev server generates and serves all files in memory, however
+      // we only need it to be responsible for javascript files since we are using react
+      // so write the html files to disk and let the backend render them normally via the proxy
+      writeToDisk: (filePath) => {
+        return /\.pug$/.test(filePath);
+      },
+    },
+    // see how this works: https://github.com/chimurai/http-proxy-middleware#options
+    proxy: {
+      "*": {
+        target: "http://localhost:5021",
+        // need these for auth (send cookies through the backend if they came from localhost:5013)
+        changeOrigin: true,
+        cookieDomainRewrite: "localhost",
+      },
+    },
+    compress: true,
+    port: "5020",
   },
 };

@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "es5"
+    "target": "es5",
+    // required for react-refresh-typescript https://github.com/Jack-Works/react-refresh-transformer/issues/3
+    "module": "ES2015",
+    // required for react-refresh-typescript https://github.com/Jack-Works/react-refresh-transformer/issues/3
+    "moduleResolution": "node"
   }
 }
