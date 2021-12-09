@@ -103,7 +103,7 @@ export function startServer() {
 
   // Start the server
   const server = app.listen(config.PORT, config.IS_LOCAL ? "localhost" : "0.0.0.0", () => {
-    console.log(`Listening on port ${config.PORT}...`);
+    console.log(`Listening on port ${config.PORT}. Access local at localhost:5020...`);
 
     // Our SIGTERM handler breaks server code watch functionality, so let's skip setting it up
     // when running locally
