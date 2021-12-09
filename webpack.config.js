@@ -41,7 +41,7 @@ const scriptLoaders = [
       getCustomTransformers:
         MODE === "development"
           ? () => ({
-              before: [ReactRefreshTypeScript()].filter(Boolean),
+              before: [ReactRefreshTypeScript()],
             })
           : null,
     },
