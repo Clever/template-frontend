@@ -27,7 +27,7 @@ function discoveryWrapper(service: string, expose: string, method: discovery.Met
 
 export const APP_NAME = process.env._APP_NAME || "{{.AppName}}"; // Provided by deployment system
 export const HOST = process.env.HOST || "localhost";
-export const PORT = Number(process.env.PORT) || 5020;
+export const PORT = Number(process.env.PORT) || 5021;
 export const FAVICON_PATH = "/favicon.ico?1";
 // TODO: Use this instead if serving assets via the CDN
 // export const FAVICON_PATH = IS_LOCAL
