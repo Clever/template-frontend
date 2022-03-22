@@ -14,6 +14,7 @@
 
 # New repo setup
 
+- [ ] Run `npm install` and commit the `package-lock.json`
 - [ ] Populate the `HOST` and `PORT` env vars in [ark-config](https://github.com/Clever/ark-config)
 - [ ] Set up Slack notifications for this app for your team if you'd like ([GitHub assignments and notifications](https://clever.atlassian.net/wiki/spaces/ENG/pages/888897571/GitHub+assignments))
 - [ ] Tune your alarms if you'd like anything other than our default recommendations ([alarm best practices](https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices))
