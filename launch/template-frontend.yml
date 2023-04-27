@@ -62,4 +62,6 @@ deploy_config:
   - clever-dev
 mesh_config:
   dev:
-    state: hybrid
+    state: mesh_only
+  prod:
+    state: mesh_only
