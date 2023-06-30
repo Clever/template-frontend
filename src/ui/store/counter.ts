@@ -25,7 +25,7 @@ const incrementCounterNow = () => async (dispatch: any, getState: any) => {
 };
 
 async function delay(seconds: number) {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     setTimeout(() => resolve(), seconds * 1000);
   });
 }
