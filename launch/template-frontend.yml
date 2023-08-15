@@ -22,27 +22,20 @@ alarms:
   parameters:
     threshold: 0.05
   extraParameters:
-    source: Total
     errorMinimum: 20
 - type: InternalErrorAlarm
   severity: major
   parameters:
     threshold: 0.01
-  extraParameters:
-    source: Total
 - type: InternalErrorAlarm
   severity: major
   parameters:
     threshold: 0.002
     evaluationPeriods: 5
-  extraParameters:
-    source: Total
 - type: InternalErrorAlarm
   severity: minor
   parameters:
     threshold: 0.001
-  extraParameters:
-    source: Total
 - type: BadRequestAlarm
   severity: major
   parameters:
