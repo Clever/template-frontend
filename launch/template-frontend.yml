@@ -13,46 +13,40 @@ expose:
     type: http
     path: /_healthcheck
 team: '{{.TeamName}}'
-# For the full spec on alarms, see catapult's swagger.yml definition for Alarm.
-# Link: https://github.com/Clever/catapult/blob/master/swagger.yml
-# Best practices: https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices
-alarms:
-- type: InternalErrorAlarm
-  severity: critical
-  parameters:
-    threshold: 0.05
-  extraParameters:
-    source: Total
-    errorMinimum: 20
-- type: InternalErrorAlarm
-  severity: major
-  parameters:
-    threshold: 0.01
-  extraParameters:
-    source: Total
-- type: InternalErrorAlarm
-  severity: major
-  parameters:
-    threshold: 0.002
-    evaluationPeriods: 5
-  extraParameters:
-    source: Total
-- type: InternalErrorAlarm
-  severity: minor
-  parameters:
-    threshold: 0.001
-  extraParameters:
-    source: Total
-- type: BadRequestAlarm
-  severity: major
-  parameters:
-    threshold: 0.15
-  extraParameters:
-    errorMinimum: 20
-- type: BadRequestAlarm
-  severity: minor
-  parameters:
-    threshold: 0.05
+# If you want to use the default alarms then delete the commented section below and catapult will set
+# them automatically for you but it is recommended that you tune the alarms based on your service needs.
+# For the full spec on alarms, see catapult's swagger.yml definition for Alarm
+#    link: https://github.com/Clever/catapult/blob/master/swagger.yml
+#    best practices: https://clever.atlassian.net/wiki/spaces/~620990898/pages/904036784/Alarm+Best+Practices
+# alarms:
+# - type: InternalErrorAlarm
+#   severity: critical
+#   parameters:
+#     threshold: 0.05
+#     evaluationPeriods: 2
+#   extraParameters:
+#     errorMinimum: 100
+# - type: InternalErrorAlarm
+#   severity: major
+#   parameters:
+#     threshold: 0.01
+#     evaluationPeriods: 2
+#   extraParameters:
+#     errorMinimum: 100
+# - type: BadRequestAlarm
+#   severity: major
+#   parameters:
+#     threshold: 0.15
+#     evaluationPeriods: 2
+#   extraParameters:
+#     errorMinimum: 100
+# - type: BadRequestAlarm
+#   severity: minor
+#   parameters:
+#     threshold: 0.05
+#     evaluationPeriods: 2
+#   extraParameters:
+#     errorMinimum: 100
 pod_config:
   group: us-west-1
 deploy_config:
