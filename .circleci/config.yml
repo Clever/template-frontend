@@ -48,7 +48,7 @@ jobs:
       - setup_remote_docker
       - run: ../ci-scripts/circleci/docker-publish $DOCKER_USER $DOCKER_PASS "$DOCKER_EMAIL" $DOCKER_ORG
       - run: ../ci-scripts/circleci/catapult-publish $CATAPULT_URL $CATAPULT_USER $CATAPULT_PASS {{.AppName}}
-      # TODO: Uncomment this if you'd like to serve assets via the CDN
+      # TODO: Uncomment this if you'd like to serve assets via the CDN.
       # - run:
       #     # Upload assets to S3, gzipping those that should be gzipped
       #     name: Upload assets to S3
@@ -84,6 +84,10 @@ workflows:
           requires:
             - build
       - publish:
+          context:
+            - {{publishEcr .}}
+            # If you want to upload files to S3 while publishing the app, uncomment this line.
+            # - {{publishS3 .}}
           requires:
             - build
       - deploy:
