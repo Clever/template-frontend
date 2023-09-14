@@ -4,7 +4,7 @@ executors:
   common-executor:
     working_directory: ~/Clever/{{.AppName}}
     docker:
-      - image: circleci/node:12-stretch
+      - image: cimg/node:18.16
     environment:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results

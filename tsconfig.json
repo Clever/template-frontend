@@ -2,15 +2,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react",
-    "lib": ["dom", "es2019"],
+    "lib": ["dom", "ES2022"],
     "module": "commonjs",
+    "moduleResolution": "node",
     "paths": {
       "src/*": ["src/*"]
     },
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "strict": true,
-    "target": "es2019",
-    "typeRoots": ["node_modules/@types", "types"]
+    "target": "ES2022",
+    "typeRoots": ["node_modules/@types", "types"],
+    "useUnknownInCatchVariables": false,
   },
   "exclude": ["node_modules", "jest"]
 }
