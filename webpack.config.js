@@ -106,7 +106,7 @@ module.exports = {
     ],
   },
   optimization: {
-    moduleIds: "hashed",
+    moduleIds: "deterministic",
     splitChunks: {
       cacheGroups: {
         // Create one vendor chunk for known large libraries that don't change often
