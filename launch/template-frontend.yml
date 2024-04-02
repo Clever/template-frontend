@@ -1,17 +1,17 @@
 env:
-  - HOST
-  - PORT
+- HOST
+- PORT
 resources:
   cpu: 0.5
   max_mem: 1
 shepherds:
-  - '{{.CreatorEmail}}'
+- '{{.CreatorEmail}}'
 expose:
-  - name: http
-    port: 80
-    health_check:
-      type: http
-      path: /_healthcheck
+- name: http
+  port: 80
+  health_check:
+    type: http
+    path: /_healthcheck
 team: '{{.TeamName}}'
 # If you want to use the default alarms then delete the commented section below and catapult will set
 # them automatically for you but it is recommended that you tune the alarms based on your service needs.
@@ -52,10 +52,5 @@ pod_config:
 deploy_config:
   canaryInProd: true
   autoDeployEnvs:
-    - production
-    - clever-dev
-mesh_config:
-  dev:
-    state: mesh_only
-  prod:
-    state: mesh_only
+  - production
+  - clever-dev
