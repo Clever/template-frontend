@@ -1,4 +1,4 @@
-import * as discovery from "clever-discovery";
+import { discovery, external_url, discoveryMethod } from "clever-discovery";
 import * as url from "url";
 
 /**
@@ -14,9 +14,21 @@ export const IS_TEST = Boolean(process.env.IS_TEST);
 // In test environments, calls to discovery can fail due to undefined env vars. We swallow errors
 // in those cases.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function discoveryWrapper(service: string, expose: string, method: discovery.Method) {
+function discoveryWrapper(service: string, expose: string, method: discoveryMethod) {
   try {
     return discovery(service, expose)[method]();
+  } catch (err) {
+    if (IS_TEST) {
+      return "";
+    }
+    throw err;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function externalUrlWrapper(url: string) {
+  try {
+    return external_url(url);
   } catch (err) {
     if (IS_TEST) {
       return "";
