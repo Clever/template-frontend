@@ -1,4 +1,4 @@
-import { discovery, external_url, discoveryMethod } from "clever-discovery";
+import { discovery, external, discoveryMethod, externalMethod } from "clever-discovery";
 import * as url from "url";
 
 /**
@@ -26,9 +26,9 @@ function discoveryWrapper(service: string, expose: string, method: discoveryMeth
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function externalUrlWrapper(url: string) {
+function externalUrlWrapper(url: string, method: externalMethod) {
   try {
-    return external_url(url);
+    return external(url)[method]();
   } catch (err) {
     if (IS_TEST) {
       return "";
