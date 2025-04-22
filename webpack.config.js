@@ -7,6 +7,7 @@ const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
 const path = require("path");
 const TSConfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 // required for react hot reloading
 const ReactRefreshTypeScript = require("react-refresh-typescript");
@@ -126,6 +127,15 @@ module.exports = {
       maxInitialRequests: 5,
     },
   },
+  // TODO: This is based on a medium circle CI instance. You can safely allocate up to 
+  // n - 1 cores here where n is the number of cores allocated by your instance size.
+  ...(process.env.CI && {
+    minimizer: [
+      new TerserPlugin({
+        parallel: 1
+      })
+    ]
+  }),
   plugins: [
     // Extract CSS out of JS assets
     new MiniCssExtractPlugin({ filename: "styles/[name].[contenthash].css" }),
