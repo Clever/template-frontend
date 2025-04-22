@@ -77,5 +77,5 @@ copy-static-assets: clean
 build: clean copy-static-assets
 	@$(WEBPACK)
 
-run: clean copy-static-assets
+run: build
 	@$(WEBPACK) serve & $(NODEMON) --watch ./src/server/ --watch ./src/shared/ -e ts --exec 'NODE_ENV=development ./scripts/startDevServer.sh'
